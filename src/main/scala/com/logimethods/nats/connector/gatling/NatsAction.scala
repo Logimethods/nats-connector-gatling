@@ -7,7 +7,7 @@
  *******************************************************************************/
 
 // @see https://www.trivento.io/write-custom-protocol-for-gatling/
-package com.logimethods.connector.nats.gatling
+package com.logimethods.nats.connector.gatling
 
 import akka.actor.ActorDSL._
 import akka.actor.ActorRef

@@ -6,17 +6,15 @@
  * http://opensource.org/licenses/MIT
  *******************************************************************************/
 
-package com.logimethods.connector.nats.gatling
+package com.logimethods.nats.connector.gatling
 
 import akka.actor.{ActorRef, Props}
 import io.gatling.core.Predef._
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.config.{Protocol, Protocols}
-import io.gatling.http.Predef._
-import io.gatling.http.request.{ExtraInfo, ExtraInfoExtractor}
-import java.util.Properties;
 
 import scala.concurrent.duration._
+import java.util.Properties
 
 class NatsActionTest extends Simulation {
   
