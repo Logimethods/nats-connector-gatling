@@ -12,7 +12,7 @@ libraryDependencies ++= Seq(
   "io.nats" % "jnats" % "0.4.1" 
 )*/
 
-libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.1.7"
+libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.1.7" % "provided"
 libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "2.1.7" % "test"
 libraryDependencies += "io.nats" 			   % "jnats"					 % "0.4.1"
 
