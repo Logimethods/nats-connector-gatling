@@ -1,5 +1,5 @@
 # nats-connector-gatling
-A NATS to Gatling Connector
+A Gatling to NATS Connector
 
 
 ```
