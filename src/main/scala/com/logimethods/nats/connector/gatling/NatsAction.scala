@@ -46,10 +46,7 @@ case class NatsBuilder(message: String) extends ActionBuilder {
 
 class NatsCall(message: String, protocol: NatsProtocol, val next: ActorRef) extends Chainable with DataWriterClient {
   override def execute(session: Session): Unit = {
-    val natsMessage  = new Message()
-    val payload = message.getBytes()
-    natsMessage.setData(payload, 0, payload.length)
-    protocol.connection.publish(natsMessage)
+    protocol.connection.publish(protocol.subject, message.getBytes())
     
     next ! session
   }
