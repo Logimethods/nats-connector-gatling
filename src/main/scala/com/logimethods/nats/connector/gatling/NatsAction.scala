@@ -32,21 +32,21 @@ case class NatsProtocol(properties: Properties, subject: String) extends Protoco
   }
 }
 
-case class NatsBuilder(message: String) extends ActionBuilder {
+case class NatsBuilder(messageProvider: Object) extends ActionBuilder {
   def natsProtocol(protocols: Protocols) =
     protocols.getProtocol[NatsProtocol]
       .getOrElse(throw new UnsupportedOperationException("NatsProtocol Protocol wasn't registered"))
  
   override def build(next: ActorRef, protocols: Protocols): ActorRef = {
     actor(actorName("NatsConnector")) {
-      new NatsCall(message, natsProtocol(protocols), next)
+      new NatsCall(messageProvider, natsProtocol(protocols), next)
     }
   }
 }
 
-class NatsCall(message: String, protocol: NatsProtocol, val next: ActorRef) extends Chainable with DataWriterClient {
+class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: ActorRef) extends Chainable with DataWriterClient {
   override def execute(session: Session): Unit = {
-    protocol.connection.publish(protocol.subject, message.getBytes())
+    protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
     
     next ! session
   }
