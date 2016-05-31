@@ -1,5 +1,5 @@
 # nats-connector-gatling
-A Gatling to NATS Connector
+That library provides a [Gatling|http://gatling.io/] to [NATS messaging system](https://nats.io) (a highly performant cloud native messaging system) Connector.
 
 
 ```
