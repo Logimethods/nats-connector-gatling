@@ -1,4 +1,4 @@
-box: mies/java7-oracle@0.0.1
+box: default
 build:
   steps:
-    - sbt test
+    - olger/sbt-assembly@0.1.0
