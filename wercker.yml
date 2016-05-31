@@ -1,4 +1,7 @@
 box: hseeberger/scala-sbt
 build:
   steps:
-    - sbt compile
+    - script:
+        name: sbt compile
+        code: |
+          sbt compile
