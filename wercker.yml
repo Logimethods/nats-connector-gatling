@@ -1,4 +1,4 @@
 box: hseeberger/scala-sbt
 build:
   steps:
-    - sbt test
+    - sbt compile
