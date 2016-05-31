@@ -1,4 +1,4 @@
-box: default
+box: hseeberger/scala-sbt
 build:
   steps:
-    - olger/sbt-assembly@0.1.0
+    - sbt test
