@@ -14,6 +14,13 @@ libraryDependencies += "io.nats" 			   % "jnats"					 % "0.4.1"
 
 updateOptions := updateOptions.value.withCachedResolution(true)
 
+// PUBLISH
+// See http://www.scala-sbt.org/0.13.5/docs/Detailed-Topics/Publishing.html
+
+val SONATYPE_USERNAME = scala.util.Properties.envOrElse("SONATYPE_USERNAME", "NOT_SET")
+val SONATYPE_PASSWORD = scala.util.Properties.envOrElse("SONATYPE_PASSWORD", "NOT_SET")
+credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", SONATYPE_USERNAME, SONATYPE_PASSWORD)
+
 publishTo <<= version { (v: String) =>
   val nexus = "https://oss.sonatype.org/"
   if (v.trim.endsWith("SNAPSHOT"))
@@ -21,7 +28,3 @@ publishTo <<= version { (v: String) =>
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
-
-val SONATYPE_USERNAME = scala.util.Properties.envOrElse("SONATYPE_USERNAME", "NOT_SET")
-val SONATYPE_PASSWORD = scala.util.Properties.envOrElse("SONATYPE_PASSWORD", "NOT_SET")
-credentials += Credentials("Sonatype Nexus Repository Manager", "nexus.scala-tools.org", SONATYPE_USERNAME, SONATYPE_PASSWORD)
