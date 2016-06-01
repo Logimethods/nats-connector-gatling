@@ -21,6 +21,11 @@ val SONATYPE_USERNAME = scala.util.Properties.envOrElse("SONATYPE_USERNAME", "NO
 val SONATYPE_PASSWORD = scala.util.Properties.envOrElse("SONATYPE_PASSWORD", "NOT_SET")
 credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", SONATYPE_USERNAME, SONATYPE_PASSWORD)
 
+licenses := Seq("MIT License" -> url("https://github.com/Logimethods/nats-connector-gatling/blob/master/LICENSE"))
+homepage := Some(url("https://github.com/Logimethods/nats-connector-gatling"))
+scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatling"), "scm:git:git://github.com:Logimethods/nats-connector-gatling.git"))
+
+publishMavenStyle := true
 publishTo <<= version { (v: String) =>
   val nexus = "https://oss.sonatype.org/"
   if (v.trim.endsWith("SNAPSHOT"))
