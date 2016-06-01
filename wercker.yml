@@ -2,6 +2,14 @@ box: hseeberger/scala-sbt
 build:
   steps:
     - script:
-        name: sbt
+        name: compile
         code: |
           sbt compile test
+          
+deploy:
+  steps:
+    - script:
+        name: deploy
+        code: |
+          sbt deploy
+
