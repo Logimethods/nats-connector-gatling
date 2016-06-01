@@ -11,5 +11,5 @@ deploy:
     - script:
         name: deploy
         code: |
-          sbt deploy
+          sbt publish
 
