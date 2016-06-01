@@ -13,13 +13,13 @@ The NATS Gatling connector provides a [Gatling](http://gatling.io/) (an open-sou
 
 #### Releases
 
-The NATS Redis connector is currently alpha and there are no official releases.
+The NATS Gatling connector is currently BETA.
 
 #### Snapshots
 
 Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) using
 the same Maven coordinates.
-If you are embedding the NATS Redis connector, add the following dependency to your project's `pom.xml`.
+If you are embedding the NATS Gatling connector, add the following dependency to your project's `pom.xml`.
 
 ```xml
   <dependencies>
