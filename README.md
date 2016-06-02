@@ -45,6 +45,23 @@ If you don't already have your pom.xml configured for using Maven snapshots, you
     </repository>
 </repositories>
 ```
+## Usage (in Scala), from Gatling to NATS
+```
+...
+import com.logimethods.nats.connector.gatling._
+
+class NatsInjection extends Simulation {
+  
+  val properties = new Properties()
+  properties.setProperty(io.nats.client.Constants.PROP_URL, "nats://localhost:4222")
+  val natsProtocol = NatsProtocol(properties, "GatlingSubject") 
+  val natsScn = scenario("NATS call").exec(NatsBuilder("Message from Gatling!"))
+ 
+  setUp(
+    natsScn.inject(constantUsersPerSec(15) during (1 minute))
+  ).protocols(natsProtocol)
+}
+```
 
 ## License
 
