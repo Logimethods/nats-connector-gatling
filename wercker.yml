@@ -5,6 +5,26 @@ build:
         name: compile
         code: |
           sbt clean compile test
+    - install-packages:
+        packages: git openssh-client
+    - add-to-known_hosts:
+        # https://github.com/wercker/step-add-to-known_hosts
+        hostname: github.com
+        fingerprint: 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48
+        type: rsa
+    - add-ssh-key:
+        # http://devcenter.wercker.com/docs/ssh-keys/generating-ssh-keys.html
+        # https://github.com/Logimethods/nats-connector-gatling/settings/keys
+        keyname: GITHUB_SSH_KEY
+    - script:
+        name: Configure Git
+        code: |-
+          git config --global user.email "laurent.magnin@logimethods.com"
+          git config --global user.name "laugimethods"
+    - script:
+        name: scaladoc
+        code: |
+          sbt ghpagesPushSite
           
 deploy:
   steps:

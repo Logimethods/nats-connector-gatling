@@ -33,3 +33,13 @@ publishTo <<= version { (v: String) =>
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
+
+// PUBLISH SCALADOC
+// https://github.com/sbt/sbt-ghpages
+ghpages.settings
+git.remoteRepo := "git@github.com:logimethods/nats-connector-gatling.git"
+//"laugimethods:pull-halyard-yeanling-shove@github.com:logimethods/nats-connector-gatling.git"
+//"git@github.com:logimethods/nats-connector-gatling.git"
+// "https://github.com/Logimethods/nats-connector-gatling.git"
+
+site.includeScaladoc()
