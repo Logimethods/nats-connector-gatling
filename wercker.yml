@@ -16,6 +16,7 @@ build:
         # http://devcenter.wercker.com/docs/ssh-keys/generating-ssh-keys.html
         # https://github.com/Logimethods/nats-connector-gatling/settings/keys
         keyname: GITHUB_SSH_KEY
+        host: github.com
     - script:
         name: Configure Git
         code: |-
