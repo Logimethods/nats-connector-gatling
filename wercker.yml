@@ -15,6 +15,7 @@ build:
     - add-ssh-key:
         # http://devcenter.wercker.com/docs/ssh-keys/generating-ssh-keys.html
         # https://github.com/Logimethods/nats-connector-gatling/settings/keys
+        # http://devcenter.wercker.com/docs/git/submodules.html
         keyname: GITHUB_SSH_KEY
         host: github.com
     - script:
@@ -22,6 +23,8 @@ build:
         code: |-
           git config --global user.email "laurent.magnin@logimethods.com"
           git config --global user.name "laugimethods"
+          # https://help.github.com/articles/error-permission-denied-publickey/#platform-all
+          ssh -vT git@github.com
     - script:
         name: scaladoc
         code: |
