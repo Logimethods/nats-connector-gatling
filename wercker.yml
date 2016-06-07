@@ -22,9 +22,9 @@ build:
         name: Configure Git
         code: |-
           git config --global user.email "laurent.magnin@logimethods.com"
-          git config --global user.name "laugimethods"
+          git config --global user.name "logimethods"
           # https://help.github.com/articles/error-permission-denied-publickey/#platform-all
-          ssh -vT git@github.com
+          # ssh -vT git@github.com
     - script:
         name: scaladoc
         code: |
