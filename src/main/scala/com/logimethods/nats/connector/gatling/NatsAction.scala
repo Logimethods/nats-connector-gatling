@@ -36,18 +36,18 @@ case class NatsBuilder(messageProvider: Object) extends ActionBuilder {
   def natsProtocol(protocols: Protocols) =
     protocols.getProtocol[NatsProtocol]
       .getOrElse(throw new UnsupportedOperationException("NatsProtocol Protocol wasn't registered"))
- 
+
+  protected class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: ActorRef) extends Chainable with DataWriterClient {
+    override def execute(session: Session): Unit = {
+      protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+      
+      next ! session
+    }
+  } 
+  
   override def build(next: ActorRef, protocols: Protocols): ActorRef = {
     actor(actorName("NatsConnector")) {
       new NatsCall(messageProvider, natsProtocol(protocols), next)
     }
-  }
-}
-
-class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: ActorRef) extends Chainable with DataWriterClient {
-  override def execute(session: Session): Unit = {
-    protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
-    
-    next ! session
   }
 }
