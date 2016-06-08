@@ -28,6 +28,7 @@ build:
     - script:
         name: scaladoc
         code: |
+          # https://github.com/sbt/sbt-ghpages
           sbt ghpagesPushSite
           
 deploy:
