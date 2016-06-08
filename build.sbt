@@ -33,13 +33,3 @@ publishTo <<= version { (v: String) =>
   else
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
-
-// http://www.scala-sbt.org/0.13/docs/Howto-Scaladoc.html
-scalacOptions in (Compile,doc) := Seq("-groups", "-implicits")
-
-// PUBLISH SCALADOC
-// https://github.com/sbt/sbt-ghpages
-ghpages.settings
-git.remoteRepo := "git@github.com:logimethods/nats-connector-gatling.git"
-
-site.includeScaladoc()
