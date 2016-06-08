@@ -5,7 +5,6 @@ build:
         name: compile
         code: |
           sbt clean compile test
-          ls -als /pipeline/source/target/scala-2.11/api
 
 scaladoc:
   steps:
