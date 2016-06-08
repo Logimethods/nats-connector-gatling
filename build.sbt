@@ -34,6 +34,9 @@ publishTo <<= version { (v: String) =>
     Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
+// http://www.scala-sbt.org/0.13/docs/Howto-Scaladoc.html
+scalacOptions in (Compile,doc) := Seq("-groups", "-implicits")
+
 // PUBLISH SCALADOC
 // https://github.com/sbt/sbt-ghpages
 ghpages.settings
