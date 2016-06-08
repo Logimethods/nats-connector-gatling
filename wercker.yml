@@ -4,14 +4,15 @@ build:
     - script:
         name: compile
         code: |
-          sbt clean compile doc
+          sbt clean compile test
           ls -als /pipeline/source/target/scala-2.11/api
+
 scaladoc:
   steps:
     - script:
         name: Generate Scaladoc
         code: |
-          sbt doc
+          sbt clean compile doc
           ls -als /pipeline/source/target/scala-2.11/api
     - install-packages:
         packages: git openssh-client
