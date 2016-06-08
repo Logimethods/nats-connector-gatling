@@ -15,11 +15,10 @@ project/plugins/project/
 # Scala-IDE specific
 .scala_dependencies
 .worksheet
-
 .classpath
-
 .project
-
 .cache-main
-
 .cache-tests
+
+# wercker specific
+_*/
