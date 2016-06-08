@@ -38,8 +38,5 @@ publishTo <<= version { (v: String) =>
 // https://github.com/sbt/sbt-ghpages
 ghpages.settings
 git.remoteRepo := "git@github.com:logimethods/nats-connector-gatling.git"
-//"laugimethods:pull-halyard-yeanling-shove@github.com:logimethods/nats-connector-gatling.git"
-//"git@github.com:logimethods/nats-connector-gatling.git"
-// "https://github.com/Logimethods/nats-connector-gatling.git"
 
 site.includeScaladoc()

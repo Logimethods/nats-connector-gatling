@@ -21,8 +21,8 @@ build:
     - script:
         name: Configure Git
         code: |-
-          git config --global user.email "laurent.magnin@logimethods.com"
-          git config --global user.name "logimethods"
+          git config --global user.email "$GITHUB_EMAIL"
+          git config --global user.name "$GITHUB_USERNAME"
           # https://help.github.com/articles/error-permission-denied-publickey/#platform-all
           # ssh -vT git@github.com
     - script:
