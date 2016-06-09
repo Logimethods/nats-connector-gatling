@@ -23,6 +23,16 @@ import io.nats.client.Connection;
 import io.nats.client.ConnectionFactory;
 import io.nats.client.Message;
 
+/** A Gatling Protocol to inject messages into NATS.
+ *  
+ * @see [[https://www.trivento.io/write-custom-protocol-for-gatling/ Write a Custom Protocol for Gatling]] 
+ * @see [[https://github.com/nats-io/jnats/blob/jnats-0.4.1/src/main/java/io/nats/client/ConnectionFactory.java ConnectionFactory.java]]
+ * @see [[http://nats-io.github.io/jnats/io/nats/client/ConnectionFactory.html ConnectionFactory API]]
+ * 
+ * @constructor create a new Protocol defined by connection to a NATS server and a subject.
+ * @param properties defining the parameters of NATS server to connect to. This connection is provided by a `new ConnectionFactory(properties)`
+ * @param subject the subject on which the messages will be pushed to NATS
+ */
 case class NatsProtocol(properties: Properties, subject: String) extends Protocol {
   var connection: Connection = null
   
@@ -32,6 +42,31 @@ case class NatsProtocol(properties: Properties, subject: String) extends Protoco
   }
 }
 
+/** A Gatling ActionBuilder to inject messages into NATS.
+ * 
+ * Possible usage:
+ * {{{
+ *     val natsScn = scenario("NATS call").exec(NatsBuilder(new ValueProvider()))
+ * }}}
+ * {{{
+ * class ValueProvider {
+ *   val incr = 10
+ *   val basedValue = 100 -incr
+ *   val maxIncr = 50
+ *   var actualIncr = 0
+ *   
+ *   override def toString(): String = {
+ *     actualIncr = (actualIncr % (maxIncr + incr)) + incr
+ *     (basedValue + actualIncr).toString()
+ *   }
+ * }
+ * }}}
+ *  
+ * @see [[https://www.trivento.io/write-custom-protocol-for-gatling/ Write a Custom Protocol for Gatling]] 
+ * @constructor create a new NatsBuilder that will emit messages into NATS.
+ * @param messageProvider  the provider of the messages to emit. The actual message will be the output of the toString() method applied to this object
+ * (which could be a simple String if the message doesn't have to change over time). 
+ */
 case class NatsBuilder(messageProvider: Object) extends ActionBuilder {
   def natsProtocol(protocols: Protocols) =
     protocols.getProtocol[NatsProtocol]
