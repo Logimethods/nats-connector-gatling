@@ -3,6 +3,8 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 
 [![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 [![wercker status](https://app.wercker.com/status/e6e3cb5b6076bbd732a840a2802a18da/s/master "wercker status")](https://app.wercker.com/project/bykey/e6e3cb5b6076bbd732a840a2802a18da)
+[![Scaladoc](http://javadoc-badge.appspot.com/com.logimethods/nats-connector-spark.svg?label=scaladoc)](http://logimethods.github.io/nats-connector-gatling/)
+
 
 ## Summary
 
