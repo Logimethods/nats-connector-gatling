@@ -28,7 +28,6 @@ scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatli
 publishMavenStyle := true
 
 pomExtra := (
-  <url>http://www.logimethods.com</url>
   <issueManagement>
     <url>https://github.com/Logimethods/nats-connector-gatling/issues/</url>
     <system>GitHub Issues</system>
