@@ -41,6 +41,8 @@ deploy:
         name: deploy
         code: |
           echo "$SONATYPE_PGP_SECRING" | base64 -d > wercker-secring.gpg
+          cut -c -3 wercker-secring.gpg
+          echo "======================"
           sbt clean compile publishSigned
 #          sbt sonatypeRelease
           
