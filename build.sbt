@@ -31,6 +31,13 @@ scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatli
 publishMavenStyle := true
 publishArtifact in Test := false
 
+useGpg := true
+
+val SONATYPE_PASSPHRASE = scala.util.Properties.envOrNone("SONATYPE_PASSPHRASE")
+pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toArray)
+
+pgpSecretRing := file("wercker-secring.gpg")
+
 pomExtra := (
   <issueManagement>
     <url>https://github.com/Logimethods/nats-connector-gatling/issues/</url>
