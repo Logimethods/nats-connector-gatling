@@ -40,10 +40,7 @@ deploy:
     - script:
         name: deploy
         code: |
-          env
-          echo "${sonatype_pgp_secring}"
-          echo "0======================"
-          echo "${sonatype_pgp_secring}" | base64 -d > wercker-secring.gpg
+          echo "${SONATYPE_PGP_SECRING_PRIVATE}" | base64 -d > wercker-secring.gpg
           ls
           echo "A======================"
           echo $(cut -c -3 wercker-secring.gpg)
