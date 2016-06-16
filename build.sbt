@@ -32,18 +32,6 @@ pomExtra := (
     <url>https://github.com/Logimethods/nats-connector-gatling/issues/</url>
     <system>GitHub Issues</system>
   </issueManagement>
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>http://www.opensource.org/licenses/mit-license.php</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <connection>scm:git:git://github.com/Logimethods/nats-connector-gatling.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/Logimethods/nats-connector-gatling.git</developerConnection>
-    <url>http://github.com/Logimethods/nats-connector-gatling</url>
-  </scm>
   <developers>
     <developer>
         <id>laugimethods</id>
