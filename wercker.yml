@@ -35,7 +35,7 @@ scaladoc:
           git merge --no-edit -s ours remotes/javadoc/gh-pages
           git push javadoc master:gh-pages
           
-deploy:
+deployX:
     steps:
         - sawatani/maven_central:
             pgp-secring: $SONATYPE_PGP_SECRING_PRIVATE
@@ -43,12 +43,13 @@ deploy:
             repository-username: $SONATYPE_USERNAME
             repository-password: $SONATYPE_PASSWORD
 
-deployX:
+deploy:
   steps:
     - script:
         name: deploy
         code: |
           echo "${SONATYPE_PGP_SECRING_PRIVATE}" > wercker-secring.gpg
+          echo "${SONATYPE_PGP_SECRING_PUBLIC}" > wercker-pubring.gpg
           cut -c -15 wercker-secring.gpg
           sbt clean compile publishSigned
 #          sbt sonatypeRelease
