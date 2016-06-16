@@ -40,6 +40,12 @@ deploy:
     - script:
         name: deploy
         code: |
+          echo "${SONATYPE_PGP_SECRING_PRIVATE}" > wercker-secringA.gpg
+          ls
+          echo "A1======================"
+          cut -c -3 wercker-secringA.gpg
+          echo $(cut -c -3 wercker-secringA.gpg)
+          echo "B1======================"
           echo "${SONATYPE_PGP_SECRING_PRIVATE}" | base64 -d > wercker-secring.gpg
           ls
           echo "A======================"
