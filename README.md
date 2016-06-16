@@ -15,7 +15,8 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 
 #### Releases
 
-The NATS Gatling connector is currently BETA.
+The first version (0.1.0) of the NATS Gatling connector has been released.
+It hovewer probably still needs some more testing to be fully validated.
 
 #### Snapshots
 
@@ -29,7 +30,7 @@ If you are embedding the NATS Gatling connector, add the following dependency to
     <dependency>
       <groupId>com.logimethods</groupId>
       <artifactId>nats-connector-gatling_2.11</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
   </dependencies>
 ```
