@@ -2,6 +2,9 @@ name := "nats-connector-gatling"
 
 organization := "com.logimethods"
 
+// Your profile name of the sonatype account. The default is the same with the organization value
+sonatypeProfileName := "laurent.magnin"
+
 version := "0.1.0"
 
 scalaVersion := "2.11.7"
@@ -26,6 +29,7 @@ homepage := Some(url("https://github.com/Logimethods/nats-connector-gatling"))
 scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatling"), "scm:git:git://github.com:Logimethods/nats-connector-gatling.git"))
 
 publishMavenStyle := true
+publishArtifact in Test := false
 
 pomExtra := (
   <issueManagement>

@@ -40,5 +40,12 @@ deploy:
     - script:
         name: deploy
         code: |
+          sbt clean compile publishSigned
+          sbt sonatypeRelease
+          
+deploy-snapshot:
+  steps:
+    - script:
+        name: deploy-snapshot
+        code: |
           sbt clean compile publish
-
