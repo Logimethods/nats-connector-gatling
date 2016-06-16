@@ -26,6 +26,41 @@ homepage := Some(url("https://github.com/Logimethods/nats-connector-gatling"))
 scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatling"), "scm:git:git://github.com:Logimethods/nats-connector-gatling.git"))
 
 publishMavenStyle := true
+
+pomExtra := (
+  <url>http://www.logimethods.com</url>
+  <issueManagement>
+    <url>https://github.com/Logimethods/nats-connector-gatling/issues/</url>
+    <system>GitHub Issues</system>
+  </issueManagement>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git://github.com/Logimethods/nats-connector-gatling.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/Logimethods/nats-connector-gatling.git</developerConnection>
+    <url>http://github.com/Logimethods/nats-connector-gatling</url>
+  </scm>
+  <developers>
+    <developer>
+        <id>laugimethods</id>
+        <name>Laurent Magnin</name>
+        <email>laurent.magnin@logimethods.com</email>
+        <url>https://github.com/laugimethods</url>
+        <organization>Logimethods</organization>
+        <organizationUrl>http://www.logimethods.com/</organizationUrl>
+        <roles>
+            <role>Senior Consultant</role>
+        </roles>
+        <timezone>America/Montreal</timezone>
+    </developer>
+  </developers>
+)
+
 publishTo <<= version { (v: String) =>
   val nexus = "https://oss.sonatype.org/"
   if (v.trim.endsWith("SNAPSHOT"))
