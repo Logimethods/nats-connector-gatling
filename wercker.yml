@@ -48,9 +48,11 @@ deploy:
     - script:
         name: deploy
         code: |
-          echo "${SONATYPE_PGP_SECRING_PRIVATE}" > wercker-secring.gpg
-          echo "${SONATYPE_PGP_SECRING_PUBLIC}" > wercker-pubring.gpg
-          cut -c -15 wercker-secring.gpg
+          base64 --version
+          mkdir -p /root/.gnupg/
+          echo "${SONATYPE_PGP_SECRING_PRIVATE}" | base64 -i -w 0 > /root/.gnupg/secring.gpg
+          echo "${SONATYPE_PGP_SECRING_PUBLIC}" | base64 -i -w 0 > /root/.gnupg/pubring.gpg
+          cut -c -15 /root/.gnupg/secring.gpg
           sbt clean compile publishSigned
 #          sbt sonatypeRelease
           
