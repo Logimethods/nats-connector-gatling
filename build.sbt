@@ -34,10 +34,11 @@ publishArtifact in Test := false
 useGpg := true
 
 val SONATYPE_PASSPHRASE = scala.util.Properties.envOrNone("SONATYPE_PASSPHRASE")
-pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toArray)
+//com.typesafe.sbt.pgp.PgpKeys.pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toCharArray)
+//pgpPassphrase := Some(Array('M', 'y', 'P', 'a', 's', 's', 'p', 'h', 'r', 'a', 's', 'e'))
 
-com.typesafe.sbt.pgp.PgpKeys.pgpSecretRing := file("wercker-secring.gpg")
-com.typesafe.sbt.pgp.PgpKeys.pgpPublicRing := file("wercker-pubring.gpg")
+//com.typesafe.sbt.pgp.PgpKeys.pgpSecretRing := file("secring.asc")
+//com.typesafe.sbt.pgp.PgpKeys.pgpPublicRing := file("pubring.asc")
 
 pomIncludeRepository := { _ => false }
 

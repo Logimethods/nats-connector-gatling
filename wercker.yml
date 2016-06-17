@@ -43,7 +43,7 @@ deployX:
             repository-username: $SONATYPE_USERNAME
             repository-password: $SONATYPE_PASSWORD
 
-deploy:
+deployZ:
   steps:
     - script:
         name: deploy
@@ -53,6 +53,14 @@ deploy:
           echo "${SONATYPE_PGP_SECRING_PRIVATE}" | base64 -i -w 0 > /root/.gnupg/secring.gpg
           echo "${SONATYPE_PGP_SECRING_PUBLIC}" | base64 -i -w 0 > /root/.gnupg/pubring.gpg
           cut -c -15 /root/.gnupg/secring.gpg
+          sbt clean compile publishSigned
+#          sbt sonatypeRelease
+
+deploy:
+  steps:
+    - script:
+        name: deploy
+        code: |
           sbt clean compile publishSigned
 #          sbt sonatypeRelease
           
