@@ -31,10 +31,10 @@ scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatli
 publishMavenStyle := true
 publishArtifact in Test := false
 
-useGpg := true
+// useGpg := true
 
 val SONATYPE_PASSPHRASE = scala.util.Properties.envOrNone("SONATYPE_PASSPHRASE")
-//com.typesafe.sbt.pgp.PgpKeys.pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toCharArray)
+pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toCharArray)
 //pgpPassphrase := Some(Array('M', 'y', 'P', 'a', 's', 's', 'p', 'h', 'r', 'a', 's', 'e'))
 
 //com.typesafe.sbt.pgp.PgpKeys.pgpSecretRing := file("secring.asc")

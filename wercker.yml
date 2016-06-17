@@ -56,11 +56,21 @@ deployZ:
           sbt clean compile publishSigned
 #          sbt sonatypeRelease
 
+deployA:
+  steps:
+    - script:
+        name: deploy
+        code: |
+          gpg --gen-key -v -v --no-tty --passphrase "$SONATYPE_PASSPHRASE"
+          sbt clean compile publishSigned
+#          sbt sonatypeRelease
+
 deploy:
   steps:
     - script:
         name: deploy
         code: |
+          echo "$SONATYPE_PASSPHRASE" | gpg --gen-key -v -v --no-tty --batch --yes --passphrase-fd 0
           sbt clean compile publishSigned
 #          sbt sonatypeRelease
           
