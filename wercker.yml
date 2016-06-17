@@ -35,52 +35,6 @@ scaladoc:
           git merge --no-edit -s ours remotes/javadoc/gh-pages
           git push javadoc master:gh-pages
           
-deployX:
-    steps:
-        - sawatani/maven_central:
-            pgp-secring: $SONATYPE_PGP_SECRING_PRIVATE
-            pgp-passphrase: $SONATYPE_PASSPHRASE
-            repository-username: $SONATYPE_USERNAME
-            repository-password: $SONATYPE_PASSWORD
-
-deployZ:
-  steps:
-    - script:
-        name: deploy
-        code: |
-          base64 --version
-          mkdir -p /root/.gnupg/
-          echo "${SONATYPE_PGP_SECRING_PRIVATE}" | base64 -i -w 0 > /root/.gnupg/secring.gpg
-          echo "${SONATYPE_PGP_SECRING_PUBLIC}" | base64 -i -w 0 > /root/.gnupg/pubring.gpg
-          cut -c -15 /root/.gnupg/secring.gpg
-          sbt clean compile publishSigned
-#          sbt sonatypeRelease
-
-deployB:
-  steps:
-    - script:
-        name: deploy
-        code: |
-          gpg --gen-key -v -v --batch --passphrase="$SONATYPE_PASSPHRASE"
-          ls -als /root/.gnupg/
-          more /root/.gnupg/secring.gpg
-#          more /root/.gnupg/gpg.conf
-#          sbt clean compile publishSigned
-#          sbt sonatypeRelease
-
-deployA:
-  steps:
-    - script:
-        name: deploy
-        code: |
-          echo YOURpassPHRASE|gpg --keyring "/root/.gnupg/" --secret-keyring "/root/.gnupg/" --batch --yes --passphrase-fd 0 --gen-key
-          ls -als /root/.gnupg/
-          more /root/.gnupg/secring.gpg
-          more /root/.gnupg/gpg.conf
-#          sbt clean compile publishSigned
-#          sbt sonatypeRelease
-          
-
 deploy:
   steps:
     - script:
@@ -89,7 +43,7 @@ deploy:
           echo "${SONATYPE_PGP_SECRING_64}" | base64 -d > /pipeline/source/secring.asc
           echo "${SONATYPE_PGP_PUBRING_64}" | base64 -d > /pipeline/source/pubring.asc
           sbt clean compile publishSigned
-#          sbt sonatypeRelease
+          sbt sonatypeRelease
 
 deploy-snapshot:
   steps:
