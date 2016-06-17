@@ -37,8 +37,10 @@ val SONATYPE_PASSPHRASE = scala.util.Properties.envOrNone("SONATYPE_PASSPHRASE")
 pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toCharArray)
 //pgpPassphrase := Some(Array('M', 'y', 'P', 'a', 's', 's', 'p', 'h', 'r', 'a', 's', 'e'))
 
-//com.typesafe.sbt.pgp.PgpKeys.pgpSecretRing := file("secring.asc")
-//com.typesafe.sbt.pgp.PgpKeys.pgpPublicRing := file("pubring.asc")
+//com.typesafe.sbt.pgp.PgpKeys.pgpSecretRing := file("/pipeline/source/secring.asc")
+//com.typesafe.sbt.pgp.PgpKeys.pgpPublicRing := file("/pipeline/source/pubring.asc")
+pgpSecretRing := file("/pipeline/source/secring.asc")
+pgpPublicRing := file("/pipeline/source/pubring.asc")
 
 pomIncludeRepository := { _ => false }
 
