@@ -2,6 +2,9 @@ name := "nats-connector-gatling"
 
 organization := "com.logimethods"
 
+// Your profile name of the sonatype account. The default is the same with the organization value
+sonatypeProfileName := "laurent.magnin"
+
 version := "0.1.0"
 
 scalaVersion := "2.11.7"
@@ -26,25 +29,26 @@ homepage := Some(url("https://github.com/Logimethods/nats-connector-gatling"))
 scmInfo := Some(ScmInfo(url("https://github.com/Logimethods/nats-connector-gatling"), "scm:git:git://github.com:Logimethods/nats-connector-gatling.git"))
 
 publishMavenStyle := true
+publishArtifact in Test := false
+
+// useGpg := true
+
+val SONATYPE_PASSPHRASE = scala.util.Properties.envOrNone("SONATYPE_PASSPHRASE")
+pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toCharArray)
+//pgpPassphrase := Some(Array('M', 'y', 'P', 'a', 's', 's', 'p', 'h', 'r', 'a', 's', 'e'))
+
+//com.typesafe.sbt.pgp.PgpKeys.pgpSecretRing := file("/pipeline/source/secring.asc")
+//com.typesafe.sbt.pgp.PgpKeys.pgpPublicRing := file("/pipeline/source/pubring.asc")
+pgpSecretRing := file("/pipeline/source/secring.asc")
+pgpPublicRing := file("/pipeline/source/pubring.asc")
+
+pomIncludeRepository := { _ => false }
 
 pomExtra := (
-  <url>http://www.logimethods.com</url>
   <issueManagement>
     <url>https://github.com/Logimethods/nats-connector-gatling/issues/</url>
     <system>GitHub Issues</system>
   </issueManagement>
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>http://www.opensource.org/licenses/mit-license.php</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <connection>scm:git:git://github.com/Logimethods/nats-connector-gatling.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/Logimethods/nats-connector-gatling.git</developerConnection>
-    <url>http://github.com/Logimethods/nats-connector-gatling</url>
-  </scm>
   <developers>
     <developer>
         <id>laugimethods</id>
