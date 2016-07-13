@@ -147,7 +147,7 @@ class ValueProvider {
 }
 ```
 ## Samples
-* The ['docker-nats-connector-spark'](https://github.com/Logimethods/docker-nats-connector-spark) Docker Based Project that makes used of Gatling, Spark & NATS.
+* The ['docker-nats-connector-spark'](https://github.com/Logimethods/docker-nats-connector-spark) Docker Based Project that makes use of Gatling, Spark & NATS.
 
 ## License
 
