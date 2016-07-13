@@ -18,6 +18,33 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 The first version (0.1.0) of the NATS Gatling connector has been released.
 It hovewer probably still needs some more testing to be fully validated.
 
+If you are embedding the NATS Gatling connector, add the following dependency to your project's `pom.xml`.
+
+```xml
+  <dependencies>
+    ...
+    <dependency>
+      <groupId>com.logimethods</groupId>
+      <artifactId>nats-connector-gatling_2.11</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+  </dependencies>
+```
+If you don't already have your pom.xml configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository to your pom.xml.
+
+```xml
+<repositories>
+    ...
+    <repository>
+        <id>sonatype-oss-public</id>
+        <url>https://oss.sonatype.org/content/groups/public/</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+    </repository>
+</repositories>
+```
+
 #### Snapshots
 
 Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) using
@@ -30,7 +57,7 @@ If you are embedding the NATS Gatling connector, add the following dependency to
     <dependency>
       <groupId>com.logimethods</groupId>
       <artifactId>nats-connector-gatling_2.11</artifactId>
-      <version>0.1.0</version>
+      <version>0.2.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 ```
