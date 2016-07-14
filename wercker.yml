@@ -15,10 +15,11 @@ scaladoc:
     - script:
         name: Move Scaladoc
         code: |
+          export PROJECT.VERSION="0.2.0-SNAPSHOT"
           mkdir -p /pipeline/source/target/scala-2.11/tmp/
           mv /pipeline/source/target/scala-2.11/api/* /pipeline/source/target/scala-2.11/tmp/
-          mkdir -p /pipeline/source/target/scala-2.11/api/docs/0.1.0/api
-          mv /pipeline/source/target/scala-2.11/tmp/* /pipeline/source/target/scala-2.11/api/docs/0.1.0/api/
+          mkdir -p /pipeline/source/target/scala-2.11/api/docs/${PROJECT.VERSION}/api
+          mv /pipeline/source/target/scala-2.11/tmp/* /pipeline/source/target/scala-2.11/api/docs/${PROJECT.VERSION}/api/
           ls -R /pipeline/source/target/scala-2.11/api
     - script:
         name: Configure Git
