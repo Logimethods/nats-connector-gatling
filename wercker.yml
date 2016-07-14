@@ -15,6 +15,8 @@ scaladoc:
     - script:
         name: Move Scaladoc
         code: |
+          sbt 'inspect version'
+          echo "================="
           export PROJECT_VERSION="0.2.0-SNAPSHOT"
           mkdir -p /pipeline/source/target/scala-2.11/tmp/
           mv /pipeline/source/target/scala-2.11/api/* /pipeline/source/target/scala-2.11/tmp/
