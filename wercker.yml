@@ -40,28 +40,28 @@ scaladoc:
         code: |
           cd /pipeline/source/target/scala-2.11/api/
           echo "AAAAAAAAAAAAA"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git init          
           echo "BBBBBBBBBBBB"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git remote add javadoc https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git
           echo "CCCCCCCCCCCCCCCCCC"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git fetch --depth=1 javadoc gh-pages
           echo "DDDDDDDDDDDDDD"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git add --all        
           echo "EEEEEEEEEEEEEEE"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git commit -m "Wercker Build Id: ${WERCKER_BUILD_ID}"
           echo "FFFFFFFFFFFF"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git merge --no-edit -s ours remotes/javadoc/gh-pages
           echo "GGGGGGGGGGGGG"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           git push javadoc master:gh-pages
           echo "HHHHHHHHHHHH"
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls /pipeline/source/target/scala-2.11/api/docs
           
 deploy:
   steps:
