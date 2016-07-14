@@ -19,7 +19,7 @@ scaladoc:
           export VER=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
           echo $VER
           echo "================="
-          export PROJECT_VERSION="0.1.0"
+          export PROJECT_VERSION=$(date +%s%3)
           mkdir -p /pipeline/source/target/scala-2.11/tmp/
           mv /pipeline/source/target/scala-2.11/api/* /pipeline/source/target/scala-2.11/tmp/
           mkdir -p /pipeline/source/target/scala-2.11/api/docs/${PROJECT_VERSION}/api
