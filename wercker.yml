@@ -12,7 +12,9 @@ scaladoc:
         name: Generate Scaladoc
         code: |
           sbt clean compile doc
-          ls -als /pipeline/source/target/scala-2.11/api
+          mkdir -p /pipeline/source/target/scala-2.11/docs/0.1.0/api
+          mv /pipeline/source/target/scala-2.11/api /pipeline/source/target/scala-2.11/docs/0.1.0
+          ls -R /pipeline/source/target/scala-2.11/
     - script:
         name: Configure Git
         code: |-
