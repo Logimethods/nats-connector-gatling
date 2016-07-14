@@ -11,10 +11,19 @@ scaladoc:
     - script:
         name: Generate Scaladoc
         code: |
+          echo "AAAAAAAAA"
           sbt clean compile doc
+          echo "BBBBBBBBBB"
+          ls -R /pipeline/source/target/
+          echo "CCCCCCCCCCC"
           mkdir -p /pipeline/source/target/scala-2.11/docs/0.1.0/api
+          echo "DDDDDDDDD"
+          ls -R /pipeline/source/target/
+          echo "EEEEEEEEE"
           mv /pipeline/source/target/scala-2.11/api /pipeline/source/target/scala-2.11/docs/0.1.0
+          echo "FFFFFFFFF"
           ls -R /pipeline/source/target/scala-2.11/
+          echo "GGGGGGGGGGG"
     - script:
         name: Configure Git
         code: |-
