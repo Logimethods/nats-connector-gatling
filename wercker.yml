@@ -25,14 +25,15 @@ scaladoc:
           echo "2 /${PROJECT_VERSION}/"
           echo "================="
           echo "3 /${PROJECT_VERSION_TMP: :-2}/"
-           echo "================="
+          echo "================="
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
           export ROOT_TMP="/pipeline/source/tmp"
           echo "mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api"
           mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api
           mv ${ROOT_API}/* ${ROOT_TMP}/docs/${PROJECT_VERSION}/api/
-          ls ${ROOT_TMP}/docs/
-          ls -R /pipeline/source/target/scala-2.11/
+          echo "================="
+          ls -R ${ROOT_TMP}/
+          echo "================="
     - script:
         name: Configure Git
         code: |-
