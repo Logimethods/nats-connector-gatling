@@ -35,6 +35,27 @@ scaladoc:
           # https://help.github.com/articles/error-permission-denied-publickey/#platform-all
           # ssh -vT git@github.com
     - script:
+        # https://srackham.wordpress.com/2014/12/14/publishing-a-project-website-to-github-pages/
+        # https://help.github.com/articles/creating-pages-with-the-automatic-generator/
+        # https://help.github.com/articles/creating-project-pages-manually/
+        # https://vaadin.com/blog/-/blogs/host-your-javadoc-s-online-in-github
+        name: Publish Scaladoc
+        code: |
+          export ROOT_GIT="/pipeline/source/git_tmp"
+          mkdir -p ${ROOT_GIT}
+          cd ${ROOT_GIT}
+          git clone --branch gh-pages https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git gh-pages
+          cd gh-pages
+          echo "> cp -r ${ROOT_TMP}/* ."
+          cp -r ${ROOT_TMP}/* .
+          ls -alsR .          
+          git add --all        
+          git commit -a -m "Wercker Run Id: '${WERCKER_RUN_ID}', Project Version: ${PROJECT_VERSION}"
+          git push origin gh-pages
+          
+scaladocX:
+  steps:
+    - script:
         # https://vaadin.com/blog/-/blogs/host-your-javadoc-s-online-in-github
         name: Publish Scaladoc
         code: |
