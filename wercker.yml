@@ -38,29 +38,39 @@ scaladoc:
         # https://vaadin.com/blog/-/blogs/host-your-javadoc-s-online-in-github
         name: publish scaladoc
         code: |
+          echo "env"
+          env
+          
+          echo "cd /pipeline/source/target/scala-2.11/api/"
           cd /pipeline/source/target/scala-2.11/api/
-          echo "AAAAAAAAAAAAA"
-          ls /pipeline/source/target/scala-2.11/api/docs
+          ls -als /pipeline/source/target/scala-2.11/api/
+          
+          echo "git init"
           git init          
-          echo "BBBBBBBBBBBB"
-          ls /pipeline/source/target/scala-2.11/api/docs
+          ls -alsR /pipeline/source/target/scala-2.11/api/
+          
+          echo "git remote add javadoc https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git"
           git remote add javadoc https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git
-          echo "CCCCCCCCCCCCCCCCCC"
-          ls /pipeline/source/target/scala-2.11/api/docs
+          ls -alsR /pipeline/source/target/scala-2.11/api/
+          
+          echo "git fetch --depth=1 javadoc gh-pages"
           git fetch --depth=1 javadoc gh-pages
-          echo "DDDDDDDDDDDDDD"
-          ls /pipeline/source/target/scala-2.11/api/docs
+          ls -als /pipeline/source/target/scala-2.11/api/docs
+          
+          echo "git add --all"
           git add --all        
-          echo "EEEEEEEEEEEEEEE"
           ls /pipeline/source/target/scala-2.11/api/docs
+          
+          echo "git commit -m ...${WERCKER_BUILD_ID}"
           git commit -m "Wercker Build Id: ${WERCKER_BUILD_ID}"
-          echo "FFFFFFFFFFFF"
           ls /pipeline/source/target/scala-2.11/api/docs
+          
+          echo "git merge --no-edit -s ours remotes/javadoc/gh-pages"
           git merge --no-edit -s ours remotes/javadoc/gh-pages
-          echo "GGGGGGGGGGGGG"
           ls /pipeline/source/target/scala-2.11/api/docs
+          
+          echo "git push javadoc master:gh-pages"
           git push javadoc master:gh-pages
-          echo "HHHHHHHHHHHH"
           ls /pipeline/source/target/scala-2.11/api/docs
           
 deploy:
