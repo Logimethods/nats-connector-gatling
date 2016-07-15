@@ -24,7 +24,7 @@ scaladoc:
           mv /pipeline/source/target/scala-2.11/api/* /pipeline/source/target/scala-2.11/tmp/
           mkdir -p /pipeline/source/target/scala-2.11/api/docs/${PROJECT_VERSION}/api
           mv /pipeline/source/target/scala-2.11/tmp/* /pipeline/source/target/scala-2.11/api/docs/${PROJECT_VERSION}/api/
-          ls -R /pipeline/source/target/scala-2.11/api
+          ls -R /pipeline/source/target/scala-2.11/
     - script:
         name: Configure Git
         code: |-
@@ -36,40 +36,44 @@ scaladoc:
           # ssh -vT git@github.com
     - script:
         # https://vaadin.com/blog/-/blogs/host-your-javadoc-s-online-in-github
-        name: publish scaladoc
+        name: Publish Scaladoc
         code: |
-          echo "env"
+          echo "> env"
           env
           
-          echo "cd /pipeline/source/target/scala-2.11/api/"
+          echo "> cd /pipeline/source/target/scala-2.11/api/"
           cd /pipeline/source/target/scala-2.11/api/
           ls -als /pipeline/source/target/scala-2.11/api/
           
-          echo "git init"
+          echo "> git init"
           git init          
           ls -alsR /pipeline/source/target/scala-2.11/api/
           
-          echo "git remote add javadoc https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git"
+          echo "> git remote add javadoc https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git"
           git remote add javadoc https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git
           ls -alsR /pipeline/source/target/scala-2.11/api/
           
-          echo "git fetch --depth=1 javadoc gh-pages"
+          echo "> git fetch --depth=1 javadoc gh-pages"
           git fetch --depth=1 javadoc gh-pages
-          ls -als /pipeline/source/target/scala-2.11/api/docs
+          ls -alsR /pipeline/source/target/scala-2.11/api/
           
-          echo "git add --all"
+          echo "> mv /pipeline/source/target/scala-2.11/tmp/* /pipeline/source/target/scala-2.11/api/docs/${PROJECT_VERSION}/api/"
+          mv /pipeline/source/target/scala-2.11/tmp/* /pipeline/source/target/scala-2.11/api/docs/${PROJECT_VERSION}/api/
+          ls /pipeline/source/target/scala-2.11/api/docs
+          
+          echo "> git add --all"
           git add --all        
           ls /pipeline/source/target/scala-2.11/api/docs
           
-          echo "git commit -m ...${WERCKER_BUILD_ID}"
+          echo "> git commit -m ...${WERCKER_BUILD_ID}"
           git commit -m "Wercker Build Id: ${WERCKER_BUILD_ID}"
           ls /pipeline/source/target/scala-2.11/api/docs
           
-          echo "git merge --no-edit -s ours remotes/javadoc/gh-pages"
+          echo "> git merge --no-edit -s ours remotes/javadoc/gh-pages"
           git merge --no-edit -s ours remotes/javadoc/gh-pages
           ls /pipeline/source/target/scala-2.11/api/docs
           
-          echo "git push javadoc master:gh-pages"
+          echo "> git push javadoc master:gh-pages"
           git push javadoc master:gh-pages
           ls /pipeline/source/target/scala-2.11/api/docs
           
