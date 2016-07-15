@@ -21,8 +21,9 @@ scaladoc:
           echo "================="
           export PROJECT_VERSION="${WERCKER_STEP_ID}"
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
-          mkdir -p /pipeline/source/target/scala-2.11/tmp/docs/${PROJECT_VERSION}/api
-          mv ${ROOT_API}/* /pipeline/source/tmp/docs/${PROJECT_VERSION}/api
+          export ROOT_TMP="/pipeline/source/tmp"
+          mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api
+          mv ${ROOT_API}/* ${ROOT_TMP}/docs/${PROJECT_VERSION}/api/
           ls -R /pipeline/source/target/scala-2.11/
     - script:
         name: Configure Git
@@ -56,8 +57,8 @@ scaladoc:
           git fetch --depth=1 javadoc gh-pages
           ls -alsR ${ROOT_API}/
           
-          echo "> cp -r /pipeline/source/tmp/* ${ROOT_API}/"
-          cp -r /pipeline/source/tmp/* ${ROOT_API}/
+          echo "> cp -r ${ROOT_TMP}/* ${ROOT_API}/"
+          cp -r ${ROOT_TMP}/* ${ROOT_API}/
           ls ${ROOT_API}/docs
           
           echo "> git add --all"
