@@ -16,10 +16,7 @@ scaladoc:
         name: Move Scaladoc
         code: |
           echo "================="
-          export VER=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
-          echo $VER
-          echo "================="
-          export PROJECT_VERSION="${WERCKER_STEP_ID}"
+          export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
           export ROOT_TMP="/pipeline/source/tmp"
           mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api
@@ -32,8 +29,6 @@ scaladoc:
           git config --global push.default simple
           git config --global user.email "$GITHUB_EMAIL"
           git config --global user.name "$GITHUB_USERNAME"
-          # https://help.github.com/articles/error-permission-denied-publickey/#platform-all
-          # ssh -vT git@github.com
     - script:
         # https://srackham.wordpress.com/2014/12/14/publishing-a-project-website-to-github-pages/
         # https://help.github.com/articles/creating-pages-with-the-automatic-generator/
@@ -46,9 +41,8 @@ scaladoc:
           cd ${ROOT_GIT}
           git clone --branch gh-pages https://$GITHUB_USERNAME:$GITHUB_PASSWORD@github.com/logimethods/nats-connector-gatling.git gh-pages
           cd gh-pages
-          echo "> cp -r ${ROOT_TMP}/* ."
           cp -r ${ROOT_TMP}/* .
-          ls -alsR .          
+          ls docs
           git add --all        
           git commit -a -m "Wercker Run Id: '${WERCKER_RUN_ID}', Project Version: ${PROJECT_VERSION}"
           git push origin gh-pages
