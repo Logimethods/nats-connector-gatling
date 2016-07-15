@@ -21,10 +21,8 @@ scaladoc:
           export PROJECT_VERSION_TMP=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
           echo "1 /${PROJECT_VERSION_TMP}/"
           echo "================="
-          export PROJECT_VERSION="${PROJECT_VERSION_TMP: :-1}"
+          export PROJECT_VERSION=$(echo "${PROJECT_VERSION_TMP}")
           echo "2 /${PROJECT_VERSION}/"
-          echo "================="
-          echo "3 /${PROJECT_VERSION_TMP: :-2}/"
           echo "================="
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
           export ROOT_TMP="/pipeline/source/tmp"
