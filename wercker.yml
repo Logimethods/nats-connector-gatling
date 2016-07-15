@@ -34,7 +34,7 @@ scaladoc:
         # https://help.github.com/articles/creating-pages-with-the-automatic-generator/
         # https://help.github.com/articles/creating-project-pages-manually/
         # https://vaadin.com/blog/-/blogs/host-your-javadoc-s-online-in-github
-        http://little418.com/2015/04/directory-listings-on-github-pages.html
+        # http://little418.com/2015/04/directory-listings-on-github-pages.html
         name: Publish Scaladoc
         code: |
           export ROOT_GIT="/pipeline/source/git_tmp"
