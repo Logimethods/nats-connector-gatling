@@ -16,7 +16,10 @@ scaladoc:
         name: Move Scaladoc
         code: |
           echo "================="
-          export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
+          export PROJECT_VERSION_TMP=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
+          echo "I$PROJECT_VERSION_TMP}I"
+          export PROJECT_VERSION="${PROJECT_VERSION_TMP::-1}"
+          echo "I$PROJECT_VERSION}I"
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
           export ROOT_TMP="/pipeline/source/tmp"
           mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api
