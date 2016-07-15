@@ -44,7 +44,7 @@ scaladoc:
           cd gh-pages
           cp -r ${ROOT_TMP}/* .
           ls docs
-          ls | perl -e 'print "<html><body><ul>"; while(<>) { chop $_; print "<li><a href=\"./docs/$_/api\">$_</a></li>";} print "</ul></body></html>"' > index.html
+          ls docs | perl -e 'print "<html><body><ul>"; while(<>) { chop $_; print "<li><a href=\"./docs/$_/api\">$_</a></li>";} print "</ul></body></html>"' > index.html
           git add --all        
           git commit -a -m "Wercker Run Id: '${WERCKER_RUN_ID}', Project Version: ${PROJECT_VERSION}"
           git push origin gh-pages
