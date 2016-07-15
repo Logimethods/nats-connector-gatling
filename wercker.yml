@@ -17,13 +17,16 @@ scaladoc:
         code: |
           echo "================="
           export PROJECT_VERSION_TMP=$(sbt 'inspect version' | grep Setting | awk '{print $NF}')
-          echo "I$PROJECT_VERSION_TMP}I"
+          echo "1 /${PROJECT_VERSION_TMP}/"
           export PROJECT_VERSION="${PROJECT_VERSION_TMP::-1}"
-          echo "I$PROJECT_VERSION}I"
+          echo "2 /${PROJECT_VERSION}/"
+          echo "3 /${PROJECT_VERSION_TMP::-2}/"
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
           export ROOT_TMP="/pipeline/source/tmp"
+          echo "mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api"
           mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api
           mv ${ROOT_API}/* ${ROOT_TMP}/docs/${PROJECT_VERSION}/api/
+          ls ${ROOT_TMP}/docs/
           ls -R /pipeline/source/target/scala-2.11/
     - script:
         name: Configure Git
