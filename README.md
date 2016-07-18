@@ -1,7 +1,7 @@
 # NATS Gatling Connector
 The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-source load testing framework based on Scala, Akka and Netty) to [NATS messaging system](https://nats.io) (a highly performant cloud native messaging system) Connector.
 
-[![License MIT](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
+[![MIT License](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 [![wercker status](https://app.wercker.com/status/e6e3cb5b6076bbd732a840a2802a18da/s/master "wercker status")](https://app.wercker.com/project/bykey/e6e3cb5b6076bbd732a840a2802a18da)
 [![Scaladoc](http://javadoc-badge.appspot.com/com.logimethods/nats-connector-spark.svg?label=scaladoc)](http://logimethods.github.io/nats-connector-gatling/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.logimethods/nats-connector-gatling_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.logimethods/nats-connector-gatling_2.11)
