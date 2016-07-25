@@ -25,6 +25,7 @@ import io.nats.client.Message;
 
 import io.gatling.core.structure.ScenarioContext
 import io.gatling.core.action.Action
+import io.gatling.core.util.NameGen
 import scala.reflect._
 
 /** A Gatling Protocol to inject messages into NATS.
@@ -71,33 +72,21 @@ import scala.reflect._
  * @param messageProvider  the provider of the messages to emit. The actual message will be the output of the toString() method applied to this object
  * (which could be a simple String if the message doesn't have to change over time). 
  */
-case class NatsBuilder(messageProvider: Object) extends ActionBuilder {
-/*  def natsProtocol(protocols: Protocols) =
-    protocols.protocol(classTag[NatsProtocol])
-      .getOrElse(throw new UnsupportedOperationException("NatsProtocol Protocol wasn't registered"))*/
+case class NatsBuilder(properties: Properties, subject: String, messageProvider: Object) extends ActionBuilder {
+  protected class NatsCall(properties: Properties, subject: String, messageProvider: Object, val next: Action) extends ChainableAction with NameGen {
+    override val name = genName("NatsCall")
 
-  protected class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: Action) extends ChainableAction {
+    val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
+    val connection = connectionFactory.createConnection()
+
     override def execute(session: Session): Unit = {
-      protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+      connection.publish(subject, messageProvider.toString().getBytes())
       
       next ! session
     }
   } 
   
-/*  override def build(next: ActorRef, protocols: Protocols): ActorRef = {
-    
-    actor("NatsConnector")(ctor) {
-      
-    }
-    actor("NatsConnector") {
-      new NatsCall(messageProvider, natsProtocol(protocols), next)
-    }
-  }*/
-    
   override def build(ctx: ScenarioContext, next: Action): Action = {
-    import ctx._
-    val natsComponents = protocolComponentsRegistry.components(NatsProtocol.NatsProtocolKey)
-    new NatsCall(messageProvider, natsComponents.protocol, next)
+    new NatsCall(properties, subject, messageProvider, next)
   }
-
 }
