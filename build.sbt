@@ -32,7 +32,7 @@ publishMavenStyle := true
 publishArtifact in Test := false
 
 val SONATYPE_PASSPHRASE = scala.util.Properties.envOrNone("SONATYPE_PASSPHRASE")
-pgpPassphrase := Some(SONATYPE_PASSPHRASE.get.toCharArray)
+pgpPassphrase := Some(SONATYPE_PASSPHRASE.getOrElse("").toCharArray)
 
 pgpSecretRing := file("/pipeline/source/secring.asc")
 pgpPublicRing := file("/pipeline/source/pubring.asc")
