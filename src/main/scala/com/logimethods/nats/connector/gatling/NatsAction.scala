@@ -9,19 +9,45 @@
 // @see https://www.trivento.io/write-custom-protocol-for-gatling/
 package com.logimethods.nats.connector.gatling
 
-import akka.actor.ActorDSL._
-import akka.actor.ActorRef
-import io.gatling.core.action.Chainable
+import akka.actor.{ ActorSystem, Props }
+import io.gatling.commons.stats.{ KO, OK }
+import io.gatling.commons.util.TimeHelper
+import io.gatling.core.CoreComponents
+import io.gatling.commons.stats.{ KO, OK }
+import io.gatling.commons.util.TimeHelper
+import io.gatling.core.CoreComponents
 import io.gatling.core.action.builder.ActionBuilder
-import io.gatling.core.config.{Protocol, Protocols}
-import io.gatling.core.result.message.{KO, OK}
-import io.gatling.core.result.writer.DataWriterClient
+import io.gatling.core.action.{ Action, ActionActor, ExitableActorDelegatingAction }
+import io.gatling.core.config.GatlingConfiguration
+import io.gatling.core.protocol._
 import io.gatling.core.session.Session
-import io.gatling.core.util.TimeHelper
+import io.gatling.core.stats.StatsEngine
+import io.gatling.core.stats.message.ResponseTimings
+import io.gatling.core.structure.ScenarioContext
+import io.gatling.jms.action.JmsReqReply._
+
+import scala.concurrent.{ Future, Promise }
+
 import java.util.Properties;
 import io.nats.client.Connection;
 import io.nats.client.ConnectionFactory;
 import io.nats.client.Message;
+
+object NatsProtocol {
+  val NatsProtocolKey = new ProtocolKey {
+
+    type Protocol = NatsProtocol
+    type Components = NatsComponents
+
+    def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
+
+    def defaultValue(configuration: GatlingConfiguration): NatsProtocol = throw new IllegalStateException("Can't provide a default value for NatsProtocol")
+
+    def newComponents(system: ActorSystem, coreComponents: CoreComponents): NatsProtocol ⇒ NatsComponents = {
+      natsProtocol ⇒ NatsComponents(natsProtocol)
+    }
+  }
+}
 
 /** A Gatling Protocol to inject messages into NATS.
  *  
@@ -34,11 +60,36 @@ import io.nats.client.Message;
  * @param subject the subject on which the messages will be pushed to NATS
  */
 case class NatsProtocol(properties: Properties, subject: String) extends Protocol {
-  var connection: Connection = null
+    val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
+    val connection = connectionFactory.createConnection()
+ // var connection: Connection = null
   
-  override def warmUp(): Unit = {
+/*  override def warmUp(): Unit = {
     val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
     connection = connectionFactory.createConnection()
+  }*/
+}
+
+case class NatsComponents(natsProtocol: NatsProtocol) extends ProtocolComponents {
+
+  def onStart: Option[Session ⇒ Session] = None
+  def onExit: Option[Session ⇒ Unit] = None
+}
+
+object NatsCall {
+  def apply(messageProvider: Object, protocol: NatsProtocol, system: ActorSystem, statsEngine: StatsEngine, next: Action) = {
+    val actor = system.actorOf(Props(new NatsCall(messageProvider, protocol, next, statsEngine)))
+    new ExitableActorDelegatingAction(genName("natsCall"), statsEngine, next, actor)
+  }
+
+}
+
+class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: Action, statsEngine: StatsEngine) extends ActionActor {
+
+  override def execute(session: Session): Unit = {
+    protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+    
+    next ! session
   }
 }
 
@@ -68,21 +119,22 @@ case class NatsProtocol(properties: Properties, subject: String) extends Protoco
  * (which could be a simple String if the message doesn't have to change over time). 
  */
 case class NatsBuilder(messageProvider: Object) extends ActionBuilder {
-  def natsProtocol(protocols: Protocols) =
-    protocols.getProtocol[NatsProtocol]
-      .getOrElse(throw new UnsupportedOperationException("NatsProtocol Protocol wasn't registered"))
+  def natsProtocol(protocols: Protocols) = protocols.protocol[NatsProtocol].getOrElse(throw new UnsupportedOperationException("NatsProtocol Protocol wasn't registered"))
 
-  protected class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: ActorRef) extends Chainable with DataWriterClient {
-    override def execute(session: Session): Unit = {
-      protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
-      
-      next ! session
-    }
-  } 
+  private def components(protocolComponentsRegistry: ProtocolComponentsRegistry): NatsComponents =
+    protocolComponentsRegistry.components(NatsProtocol.NatsProtocolKey)
+
+  override def build(ctx: ScenarioContext, next: Action): Action = {
+    import ctx._
+    val statsEngine = coreComponents.statsEngine
+
+    val natsComponents = components(protocolComponentsRegistry)
+    NatsCall(messageProvider, natsComponents.natsProtocol, ctx.system, statsEngine, next)
+  }
   
-  override def build(next: ActorRef, protocols: Protocols): ActorRef = {
+/*  override def build(next: ActorRef, protocols: Protocols): ActorRef = {
     actor(actorName("NatsConnector")) {
       new NatsCall(messageProvider, natsProtocol(protocols), next)
     }
-  }
+  }*/
 }
