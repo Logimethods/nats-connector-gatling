@@ -94,6 +94,40 @@
   }
 }</pre></div><dl class="paramcmts block"><dt class="param">messageProvider</dt><dd class="cmt"><p>the provider of the messages to emit. The actual message will be the output of the toString() method applied to this object
 (which could be a simple String if the message doesn't have to change over time).</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="https://www.trivento.io/write-custom-protocol-for-gatling/" target="_blank">Write a Custom Protocol for Gatling</a></p></span></dd></dl></div>
+    </li><li name="com.logimethods.nats.connector.gatling.NatsCall" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NatsCallextendsActionActor"></a>
+      <a id="NatsCall:NatsCall"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="NatsCall.html"><span class="name">NatsCall</span></a><span class="result"> extends <span class="extype" name="io.gatling.core.action.ActionActor">ActionActor</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.package@NatsCallextendsActionActor" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="com.logimethods.nats.connector.gatling.NatsComponents" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NatsComponentsextendsProtocolComponentswithProductwithSerializable"></a>
+      <a id="NatsComponents:NatsComponents"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="NatsComponents.html"><span class="name">NatsComponents</span></a><span class="params">(<span name="natsProtocol">natsProtocol: <a href="NatsProtocol.html" class="extype" name="com.logimethods.nats.connector.gatling.NatsProtocol">NatsProtocol</a></span>)</span><span class="result"> extends <span class="extype" name="io.gatling.core.protocol.ProtocolComponents">ProtocolComponents</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.package@NatsComponentsextendsProtocolComponentswithProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
     </li><li name="com.logimethods.nats.connector.gatling.NatsProtocol" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="NatsProtocolextendsProtocolwithProductwithSerializable"></a>
       <a id="NatsProtocol:NatsProtocol"></a>
@@ -103,7 +137,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="NatsProtocol.html"><span class="name">NatsProtocol</span></a><span class="params">(<span name="properties">properties: <span class="extype" name="java.util.Properties">Properties</span></span>, <span name="subject">subject: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="io.gatling.core.config.Protocol">Protocol</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <a href="NatsProtocol.html"><span class="name">NatsProtocol</span></a><span class="params">(<span name="properties">properties: <span class="extype" name="java.util.Properties">Properties</span></span>, <span name="subject">subject: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="io.gatling.core.protocol.Protocol">Protocol</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.package@NatsProtocolextendsProtocolwithProductwithSerializable" title="Permalink" target="_top">
@@ -117,7 +151,44 @@
 
         
 
-        
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="com.logimethods.nats.connector.gatling.NatsCall" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NatsCall"></a>
+      <a id="NatsCall:NatsCall"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="NatsCall$.html"><span class="name">NatsCall</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.package@NatsCall" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="com.logimethods.nats.connector.gatling.NatsProtocol" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="NatsProtocol"></a>
+      <a id="NatsProtocol:NatsProtocol"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="NatsProtocol$.html"><span class="name">NatsProtocol</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.package@NatsProtocol" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
 
         
 

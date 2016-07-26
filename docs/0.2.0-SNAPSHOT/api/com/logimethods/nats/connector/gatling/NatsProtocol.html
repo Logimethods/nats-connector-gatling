@@ -28,10 +28,12 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img alt="Class" src="../../../../../lib/class_big.png" />
+        <a href="NatsProtocol$.html" title="See companion object"><img alt="Class/Object" src="../../../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../../../../package.html" class="extype" name="com">com</a>.<a href="../../../package.html" class="extype" name="com.logimethods">logimethods</a>.<a href="../../package.html" class="extype" name="com.logimethods.nats">nats</a>.<a href="../package.html" class="extype" name="com.logimethods.nats.connector">connector</a>.<a href="package.html" class="extype" name="com.logimethods.nats.connector.gatling">gatling</a></p>
-        <h1>NatsProtocol</h1><h3><span class="morelinks"><div>Related Doc:
-            <a href="package.html" class="extype" name="com.logimethods.nats.connector.gatling">package gatling</a>
+        <h1><a href="NatsProtocol$.html" title="See companion object">NatsProtocol</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="NatsProtocol$.html" title="See companion object">object NatsProtocol</a>
+            | <a href="package.html" class="extype" name="com.logimethods.nats.connector.gatling">package gatling</a>
           </div></span></h3><span class="permalink">
       <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.NatsProtocol" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
@@ -45,14 +47,14 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">NatsProtocol</span><span class="params">(<span name="properties">properties: <span class="extype" name="java.util.Properties">Properties</span></span>, <span name="subject">subject: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="io.gatling.core.config.Protocol">Protocol</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+        <span class="name">NatsProtocol</span><span class="params">(<span name="properties">properties: <span class="extype" name="java.util.Properties">Properties</span></span>, <span name="subject">subject: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="io.gatling.core.protocol.Protocol">Protocol</span> with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>A Gatling Protocol to inject messages into NATS.
 </p></div><dl class="paramcmts block"><dt class="param">properties</dt><dd class="cmt"><p>defining the parameters of NATS server to connect to. This connection is provided by a <code>new ConnectionFactory(properties)</code></p></dd><dt class="param">subject</dt><dd class="cmt"><p>the subject on which the messages will be pushed to NATS</p></dd></dl><dl class="attributes block"> <dt>See also</dt><dd><span class="cmt"><p><a href="http://nats-io.github.io/jnats/io/nats/client/ConnectionFactory.html" target="_blank">ConnectionFactory API</a></p></span><span class="cmt"><p><a href="https://github.com/nats-io/jnats/blob/jnats-0.4.1/src/main/java/io/nats/client/ConnectionFactory.java" target="_blank">ConnectionFactory.java</a></p></span><span class="cmt"><p><a href="https://www.trivento.io/write-custom-protocol-for-gatling/" target="_blank">Write a Custom Protocol for Gatling</a></p></span></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="io.gatling.core.config.Protocol">Protocol</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <span class="extype" name="io.gatling.core.protocol.Protocol">Protocol</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -70,7 +72,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="com.logimethods.nats.connector.gatling.NatsProtocol"><span>NatsProtocol</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="io.gatling.core.config.Protocol"><span>Protocol</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="com.logimethods.nats.connector.gatling.NatsProtocol"><span>NatsProtocol</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="io.gatling.core.protocol.Protocol"><span>Protocol</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -212,13 +214,30 @@
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">var</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
         <span class="name">connection</span><span class="result">: <span class="extype" name="io.nats.client.Connection">Connection</span></span>
       </span>
       </h4><span class="permalink">
       <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.NatsProtocol@connection:io.nats.client.Connection" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li><li name="com.logimethods.nats.connector.gatling.NatsProtocol#connectionFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="connectionFactory:io.nats.client.ConnectionFactory"></a>
+      <a id="connectionFactory:ConnectionFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">connectionFactory</span><span class="result">: <span class="extype" name="io.nats.client.ConnectionFactory">ConnectionFactory</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.NatsProtocol@connectionFactory:io.nats.client.ConnectionFactory" title="Permalink" target="_top">
         <img src="../../../../../lib/permalink.png" alt="Permalink" />
       </a>
     </span>
@@ -399,23 +418,6 @@
       </a>
     </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="io.gatling.core.config.Protocol#userEnd" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="userEnd(session:&lt;?&gt;):Unit"></a>
-      <a id="userEnd(Session):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">userEnd</span><span class="params">(<span name="session">session: <span class="extype" name="io.gatling.core.session.Session">Session</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.NatsProtocol@userEnd(session:io.gatling.core.session.Session):Unit" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Protocol</dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
       <a id="wait():Unit"></a>
@@ -485,23 +487,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="com.logimethods.nats.connector.gatling.NatsProtocol#warmUp" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="warmUp():Unit"></a>
-      <a id="warmUp():Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">warmUp</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4><span class="permalink">
-      <a href="../../../../../index.html#com.logimethods.nats.connector.gatling.NatsProtocol@warmUp():Unit" title="Permalink" target="_top">
-        <img src="../../../../../lib/permalink.png" alt="Permalink" />
-      </a>
-    </span>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="com.logimethods.nats.connector.gatling.NatsProtocol">NatsProtocol</a> → Protocol</dd></dl></div>
     </li></ol>
             </div>
 
@@ -519,8 +504,8 @@
               <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
-            </div><div class="parent" name="io.gatling.core.config.Protocol">
-              <h3>Inherited from <span class="extype" name="io.gatling.core.config.Protocol">Protocol</span></h3>
+            </div><div class="parent" name="io.gatling.core.protocol.Protocol">
+              <h3>Inherited from <span class="extype" name="io.gatling.core.protocol.Protocol">Protocol</span></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
