@@ -7,7 +7,7 @@
  *******************************************************************************/
 
 // @see https://www.trivento.io/write-custom-protocol-for-gatling/
-package com.logimethods.nats.connector.gatling
+package com.logimethods.connector.gatling.to_nats
 
 import akka.actor.{ ActorSystem, Props }
 import io.gatling.commons.stats.{ KO, OK }

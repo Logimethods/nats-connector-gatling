@@ -6,7 +6,7 @@
  * http://opensource.org/licenses/MIT
  *******************************************************************************/
 
-package com.logimethods.nats.connector.gatling
+package com.logimethods.connector.gatling.to_nats
 
 import akka.actor.{ActorRef, Props}
 import io.gatling.core.Predef._
