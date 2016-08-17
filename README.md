@@ -20,64 +20,31 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 The first version (0.1.0) of the NATS Gatling connector has been released.
 It hovewer probably still needs some more testing to be fully validated.
 
-If you are embedding the NATS Gatling connector, add the following dependency to your project's `pom.xml`.
+If you are embedding the NATS Gatling connector, add the following dependency to your project's Scala `build.sbt` file.
 
-```xml
-  <dependencies>
-    ...
-    <dependency>
-      <groupId>com.logimethods</groupId>
-      <artifactId>nats-connector-gatling_2.11</artifactId>
-      <version>0.1.0</version>
-    </dependency>
-  </dependencies>
+```scala
+libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.1.0"
 ```
-If you don't already have your pom.xml configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository to your pom.xml.
+If you don't already have your build configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository.
 
-```xml
-<repositories>
-    ...
-    <repository>
-        <id>sonatype-oss-public</id>
-        <url>https://oss.sonatype.org/content/groups/public/</url>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-    </repository>
-</repositories>
+```scala
+resolvers += "Sonatype OSS Release" at "https://oss.sonatype.org/content/groups/public/"
 ```
 
 #### Snapshots
 
-Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) using
-the same Maven coordinates.
-If you are embedding the NATS Gatling connector, add the following dependency to your project's `pom.xml`.
+Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) using the same Maven coordinates.
+If you are embedding the NATS Gatling connector, add the following dependency to your project's `build.sbt` file.
 
-```xml
-  <dependencies>
-    ...
-    <dependency>
-      <groupId>com.logimethods</groupId>
-      <artifactId>nats-connector-gatling_2.11</artifactId>
-      <version>0.2.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
+```scala
+libraryDependencies += "com.logimethods" %% "nats-connector-gatling" % "0.2.0-SNAPSHOT"
 ```
-If you don't already have your pom.xml configured for using Maven snapshots, you'll also need to add the following repository to your pom.xml.
+If you don't already have your build configured for using Maven snapshots, you'll also need to add the following repository.
 
-```xml
-<repositories>
-    ...
-    <repository>
-        <id>sonatype-snapshots</id>
-        <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        <snapshots>
-            <enabled>true</enabled>
-        </snapshots>
-    </repository>
-</repositories>
+```scala
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 ```
-## Usage (in Scala), from Gatling to NATS
+## Usage in Scala, from Gatling to NATS
 ### Simple usage
 ```
 ...
