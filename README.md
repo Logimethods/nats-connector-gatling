@@ -153,10 +153,10 @@ class ValueProvider {
 
 ## Release Notes
 ### Version 0.1.0
-* Is based on Gatling version 2.1.7.
+* Is based on [Gatling version 2.1.7](http://gatling.io/docs/2.1.7/).
 
 ### Version 0.2.0
-* Is based on Gatling version 2.2.2.
+* Is based on [Gatling version 2.2.2](http://gatling.io/docs/2.2.2/).
 * Require JDK8
 
 ## License
