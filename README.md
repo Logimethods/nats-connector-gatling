@@ -18,6 +18,8 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 The first version (0.1.0) of the NATS Gatling connector has been released.
 It hovewer probably still needs some more testing to be fully validated.
 
+It is compatible with [Gatling version 2.17](http://gatling.io/docs/2.1.7/).
+
 #### Snapshots
 
 Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) using
