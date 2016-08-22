@@ -6,7 +6,7 @@ build:
         name: (TMP) Populate local maven repo
         code: |
           mkdir -p "/root/.m2/repository/io/nats/"
-          cp -v -R "./repository/io/nats/java-nats-streaming/" "/root/.m2/repository/io/nats/"
+          cp -v -R "./repository/io/nats/" "/root/.m2/repository/io/"
     - script:
         name: compile
         code: |
