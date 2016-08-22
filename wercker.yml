@@ -1,7 +1,6 @@
 box: hseeberger/scala-sbt
 build:
   steps:
-  steps:
     - script:
         name: (TMP) Populate local maven repo
         code: |
@@ -69,6 +68,11 @@ deploy:
 
 deploy-snapshot:
   steps:
+    - script:
+        name: (TMP) Populate local maven repo
+        code: |
+          mkdir -p "/root/.m2/repository/io/nats/"
+          cp -v -R "./repository/io/nats/" "/root/.m2/repository/io/"
     - script:
         name: deploy-snapshot
         code: |
