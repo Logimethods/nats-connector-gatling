@@ -10,7 +10,7 @@ version := "0.2.0-SNAPSHOT"
 scalaVersion := "2.11.7"
 
 // TODO Remove once the java-nats-streaming is released on a public repository
-resolvers += "Local Maven Repository" at "file://"+sys.props.getOrElse("WERCKER_CACHE_DIR", default = Path.userHome.absolutePath+"/.m2/repository")
+resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
 
 libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.2" % "provided"
 libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "2.2.2" % "test"

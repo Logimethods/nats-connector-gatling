@@ -5,8 +5,8 @@ build:
     - script:
         name: (TMP) Populate local maven repo
         code: |
-          mkdir -p "${WERCKER_CACHE_DIR}/io/nats/"
-          cp -v -R "./repository/io/nats/java-nats-streaming/" "${WERCKER_CACHE_DIR}/io/nats/"
+          mkdir -p "/root/.m2/repository/io/nats/"
+          cp -v -R "./repository/io/nats/java-nats-streaming/" "/root/.m2/repository/io/nats/"
     - script:
         name: compile
         code: |
