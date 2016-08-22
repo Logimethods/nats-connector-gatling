@@ -63,7 +63,7 @@ deploy:
         name: check non-snapshot
         code: |
           export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
-          if [[ ${PROJECT_VERSION} == *"SNAPSHOT"* ]];then exit(1); fi
+          if [[ ${PROJECT_VERSION} == *"SNAPSHOT"* ]];then exit 1; fi
     - script:
         name: deploy
         code: |
@@ -77,7 +77,7 @@ deploy-snapshot:
         name: check snapshot
         code: |
           export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
-          if [[ ${PROJECT_VERSION} != *"SNAPSHOT"* ]];then exit(1); fi
+          if [[ ${PROJECT_VERSION} != *"SNAPSHOT"* ]];then exit 1; fi
     - script:
         name: (TMP) Populate local maven repo
         code: |
