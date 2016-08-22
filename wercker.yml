@@ -2,10 +2,6 @@ box: hseeberger/scala-sbt
 build:
   steps:
     - script:
-        name: Define Project Version
-        code: |
-          export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
-    - script:
         name: (TMP) Populate local maven repo
         code: |
           mkdir -p "/root/.m2/repository/io/nats/"
@@ -24,6 +20,7 @@ scaladoc:
     - script:
         name: Move Scaladoc
         code: |
+          export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
           export ROOT_API="/pipeline/source/target/scala-2.11/api"
           export ROOT_TMP="/pipeline/source/tmp"
           echo "mkdir -p ${ROOT_TMP}/docs/${PROJECT_VERSION}/api"
@@ -63,6 +60,11 @@ scaladoc:
 deploy:
   steps:
     - script:
+        name: check non-snapshot
+        code: |
+          export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
+          if [[ ${PROJECT_VERSION} == *"SNAPSHOT"* ]]; exit(0); fi
+    - script:
         name: deploy
         code: |
           echo "${SONATYPE_PGP_SECRING_64}" | base64 -d > /pipeline/source/secring.asc
@@ -72,9 +74,13 @@ deploy:
 deploy-snapshot:
   steps:
     - script:
+        name: check snapshot
+        code: |
+          export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
+          if [[ ${PROJECT_VERSION} != *"SNAPSHOT"* ]]; exit(0); fi
+    - script:
         name: (TMP) Populate local maven repo
         code: |
-          echo "PROJECT_VERSION ${PROJECT_VERSION}"
           mkdir -p "/root/.m2/repository/io/nats/"
           cp -v -R "./repository/io/nats/" "/root/.m2/repository/io/"
     - script:
