@@ -1,6 +1,11 @@
 box: hseeberger/scala-sbt
 build:
   steps:
+  steps:
+    - script:
+        name: (TMP) Populate local maven repo
+        code: |
+          cp -v -R "./repository/io/nats/java-nats-streaming/" "${WERCKER_CACHE_DIR}/io/nats/"
     - script:
         name: compile
         code: |
