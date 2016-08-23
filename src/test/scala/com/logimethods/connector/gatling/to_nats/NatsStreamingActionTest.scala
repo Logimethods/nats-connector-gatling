@@ -18,7 +18,7 @@ import java.util.Properties
 class NatsStreamingActionTest extends Simulation {
   
   val clusterID = "test-cluster"
-  val natsProtocol = NatsStreamingProtocol(clusterID, "TestingSubject")
+  val natsProtocol = NatsStreamingProtocol(null, clusterID, "TestingSubject")
   
   val natsScn = scenario("NATS call").exec(NatsStreamingBuilder("Hello from Gatling!"))
  

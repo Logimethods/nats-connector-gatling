@@ -33,6 +33,8 @@ import io.nats.client.Connection;
 import io.nats.client.ConnectionFactory;
 import io.nats.client.Message;
 
+import com.typesafe.scalalogging.StrictLogging
+
 object NatsProtocol {
   val NatsProtocolKey = new ProtocolKey {
 
@@ -59,10 +61,11 @@ object NatsProtocol {
  * @param properties defining the parameters of NATS server to connect to. This connection is provided by a `new ConnectionFactory(properties)`
  * @param subject the subject on which the messages will be pushed to NATS
  */
-case class NatsProtocol(properties: Properties, subject: String) extends Protocol {
+case class NatsProtocol(properties: Properties, subject: String) extends Protocol with StrictLogging {
     val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
     val connection = connectionFactory.createConnection()
- // var connection: Connection = null
+   
+    logger.info(s"Connection to the NATS Server defined by '${properties}' with '$subject' Subject")
   
 /*  override def warmUp(): Unit = {
     val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);

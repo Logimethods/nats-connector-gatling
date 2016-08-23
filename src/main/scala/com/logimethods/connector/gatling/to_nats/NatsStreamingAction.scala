@@ -32,6 +32,8 @@ import java.util.Properties;
 import io.nats.stan.Connection;
 import io.nats.stan.ConnectionFactory;
 
+import com.typesafe.scalalogging.StrictLogging
+
 object NatsStreamingProtocol {
   val NatsStreamingProtocolKey = new ProtocolKey {
 
@@ -58,12 +60,14 @@ object NatsStreamingProtocol {
  * @param properties defining the parameters of NATS server to connect to. This connection is provided by a `new ConnectionFactory(properties)`
  * @param subject the subject on which the messages will be pushed to NATS
  */
-case class NatsStreamingProtocol(clusterID: String, subject: String) extends Protocol {
-    val CLIENT_ID_ROOT = "NatsStreamingProtocol_"
+case class NatsStreamingProtocol(natsUrl:String, clusterID: String, subject: String) extends Protocol with StrictLogging {
+    val CLIENT_ID_ROOT = "NSP_"
     val clientID = CLIENT_ID_ROOT + System.identityHashCode(this) + Thread.currentThread().getId() + java.lang.System.currentTimeMillis()
-    val connectionFactory: ConnectionFactory = new ConnectionFactory(clusterID, clientID);
+    val connectionFactory: ConnectionFactory = new ConnectionFactory(clusterID, clientID)
+    connectionFactory.setNatsUrl(natsUrl)
     val connection: Connection = connectionFactory.createConnection()
- // var connection: Connection = null
+    
+    logger.info(s"Connection to the '${clusterID}' NATS Streaming Server located at '${natsUrl}' with '$clientID' ClientID and '$subject' Subject")
   
 /*  override def warmUp(): Unit = {
     val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
