@@ -37,7 +37,7 @@ Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) 
 If you are embedding the NATS Gatling connector, add the following dependency to your project's `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" %% "nats-connector-gatling" % "0.2.0-SNAPSHOT"
+libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "0.2.0-SNAPSHOT"
 ```
 If you don't already have your build configured for using Maven snapshots, you'll also need to add the following repository.
 
