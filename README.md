@@ -46,7 +46,7 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 ```
 ## Usage in Scala, from Gatling to NATS
 ### Simple usage
-```
+```scala
 ...
 import com.logimethods.connector.gatling.to_nats._
 
@@ -63,7 +63,7 @@ class NatsInjection extends Simulation {
 }
 ```
 ### More complex usage
-```
+```scala
 import akka.actor.{ActorRef, Props}
 import io.gatling.core.Predef._
 import io.gatling.core.action.builder.ActionBuilder
