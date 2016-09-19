@@ -91,7 +91,7 @@ class NatsInjection extends Simulation {
     println("Will emit messages to " + subject)
     val natsProtocol = NatsProtocol(properties, subject)
     
-    // The messages sent to NATS will not be fixed thanks to the ValueProvider.
+    // The messages sent to NATS will not be constant thanks to the ValueProvider.
     val natsScn = scenario("NATS call").exec(NatsBuilder(new ValueProvider()))
    
     setUp(
