@@ -49,7 +49,7 @@ build:
           export ROOT_GIT="/pipeline/source/git_tmp"
           mkdir -p ${ROOT_GIT}
           cd ${ROOT_GIT}
-          git clone --branch gh-pages git@github.com/Logimethods/nats-connector-gatling.git gh-pages
+          git clone --branch gh-pages git@github.com:${GITHUB_USERNAME}/Logimethods/nats-connector-gatling.git gh-pages
           cd gh-pages
           cp -r ${ROOT_TMP}/* .
           ls docs
