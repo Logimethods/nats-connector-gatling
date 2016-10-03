@@ -67,11 +67,15 @@ deploy:
           export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
           if [[ ${PROJECT_VERSION} == *"SNAPSHOT"* ]];then exit 1; fi
     - script:
-        name: sonatype deploy
+        name: sonatype publishSigned
         code: |
           echo "${SONATYPE_PGP_SECRING_64}" | base64 -d > /pipeline/source/secring.asc
           echo "${SONATYPE_PGP_PUBRING_64}" | base64 -d > /pipeline/source/pubring.asc
           sbt clean compile publishSigned sonatypeClose sonatypeRelease
+    - script:
+        name: sonatype release
+        code: |
+          sbt sonatypeRelease
 
 deploy-snapshot:
   steps:
