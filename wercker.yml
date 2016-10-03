@@ -67,7 +67,6 @@ deploy:
           export PROJECT_VERSION=$(sbt 'inspect version' | grep Setting | awk '{print $NF}' | perl -pe 's/\e([^\[\]]|\[.*?[a-zA-Z]|\].*?\a)//g')
           if [[ ${PROJECT_VERSION} == *"SNAPSHOT"* ]];then exit 1; fi
     - script:
-    	# https://github.com/xerial/sbt-sonatype
         name: sonatype deploy
         code: |
           echo "${SONATYPE_PGP_SECRING_64}" | base64 -d > /pipeline/source/secring.asc
