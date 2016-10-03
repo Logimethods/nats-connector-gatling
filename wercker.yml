@@ -25,7 +25,7 @@ scaladoc:
           ls -R ${ROOT_TMP}/
           echo "=================================="
     - add-ssh-key:
-        keyname: GIT_PRIVATE_SSH_KEY
+        keyname: GITHUB_SSH_KEY
         host: github.com
     - add-to-known_hosts:
         hostname: github.com
