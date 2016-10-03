@@ -1,12 +1,13 @@
 box: hseeberger/scala-sbt
-build:
+build-x:
   steps:
     - script:
         name: compile
         code: |
           sbt clean compile test
 
-scaladoc:
+#scaladoc:
+build:
   steps:
     - script:
         name: Generate Scaladoc
