@@ -3,7 +3,7 @@ name := "nats-connector-gatling"
 organization := "com.logimethods"
 
 // Your profile name of the sonatype account. The default is the same with the organization value
-sonatypeProfileName := "laurent.magnin"
+//// sonatypeProfileName := "laurent.magnin"
 
 version := "0.2.0"
 
