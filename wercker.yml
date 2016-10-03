@@ -1,13 +1,12 @@
 box: hseeberger/scala-sbt
-build-x:
+build:
   steps:
     - script:
         name: compile
         code: |
           sbt clean compile test
 
-#scaladoc:
-build:
+scaladoc:
   steps:
     - script:
         name: Generate Scaladoc
@@ -44,6 +43,7 @@ build:
         # https://help.github.com/articles/creating-project-pages-manually/
         # https://vaadin.com/blog/-/blogs/host-your-javadoc-s-online-in-github
         # http://little418.com/2015/04/directory-listings-on-github-pages.html
+        # https://gist.github.com/nichtich/5290675
         name: Publish Scaladoc
         code: |
           export ROOT_GIT="/pipeline/source/git_tmp"
