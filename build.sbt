@@ -11,8 +11,6 @@ scalaVersion := "2.11.7"
 
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 resolvers += "Sonatype OSS Release" at "https://oss.sonatype.org/content/groups/public/"
-// TODO Remove once the nats-parent 1.0-SNAPSHOT is fixed (https://github.com/nats-io/java-nats-streaming/issues/18)
-///resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
 
 libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.2" % "provided"
 libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "2.2.2" % "test"
