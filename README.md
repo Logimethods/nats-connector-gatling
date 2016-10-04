@@ -4,7 +4,7 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 [![MIT License](https://img.shields.io/npm/l/express.svg)](http://opensource.org/licenses/MIT)
 [![Issues](https://img.shields.io/github/issues/Logimethods/nats-connector-gatling.svg)](https://github.com/Logimethods/nats-connector-gatling/issues)
 [![wercker status](https://app.wercker.com/status/e6e3cb5b6076bbd732a840a2802a18da/s/master "wercker status")](https://app.wercker.com/project/bykey/e6e3cb5b6076bbd732a840a2802a18da)
-[![Scaladoc](http://javadoc-badge.appspot.com/com.logimethods/nats-connector-spark.svg?label=scaladoc)](http://logimethods.github.io/nats-connector-gatling/)
+[![Scaladoc](http://javadoc-badge.appspot.com/com.logimethods/nats-connector-gatling_2.11.svg?label=scaladoc)](http://logimethods.github.io/nats-connector-gatling/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.logimethods/nats-connector-gatling_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.logimethods/nats-connector-gatling_2.11)
 
 
@@ -17,13 +17,13 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 
 #### Releases
 
-The first version (0.1.0) of the NATS Gatling connector has been released.
+The two first versions (0.1.0 & 0.2.0) of the NATS Gatling connector have been released.
 It hovewer probably still needs some more testing to be fully validated.
 
 If you are embedding the NATS Gatling connector, add the following dependency to your project's Scala `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.1.0"
+libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.2.0"
 ```
 If you don't already have your build configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository.
 
@@ -37,7 +37,7 @@ Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) 
 If you are embedding the NATS Gatling connector, add the following dependency to your project's `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "0.2.0-SNAPSHOT"
+libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "0.3.0-SNAPSHOT"
 ```
 If you don't already have your build configured for using Maven snapshots, you'll also need to add the following repository.
 
