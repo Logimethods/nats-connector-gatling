@@ -68,11 +68,11 @@ import akka.actor.{ActorRef, Props}
 import io.gatling.core.Predef._
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.config.{Protocol, Protocols}
-import com.logimethods.connector.gatling.to_nats._
-
 import scala.concurrent.duration._
 import java.util.Properties
 import io.nats.client.Constants.PROP_URL
+
+import com.logimethods.connector.gatling.to_nats._
 
 class NatsInjection extends Simulation {
   
@@ -115,6 +115,41 @@ class ValueProvider {
   }
 }
 ```
+## Usage in Scala, from Gatling to NATS STREAMING
+```scala
+...
+package com.logimethods.nats.demo
+
+import scala.concurrent.duration._
+import java.util.Properties
+import io.nats.client.Constants.PROP_URL
+import akka.actor.{ActorRef, Props}
+import io.gatling.core.Predef._
+import io.gatling.core.action.builder.ActionBuilder
+
+import com.logimethods.connector.gatling.to_nats._
+
+class NatsStreamingInjection extends Simulation {
+  
+  val natsUrl = System.getenv("NATS_URI")
+  val clusterID = System.getenv("NATS_CLUSTER_ID")
+  
+  var subject = System.getenv("GATLING_TO_NATS_SUBJECT")
+  if (subject == null) {
+    println("No Subject has been defined through the 'GATLING_TO_NATS_SUBJECT' Environment Variable!!!")
+  } else {
+    println("Will emit messages to " + subject)
+    val natsProtocol = NatsStreamingProtocol(natsUrl, clusterID, subject)
+    
+    val natsScn = scenario("NATS call").exec(NatsStreamingBuilder(new ValueProvider()))
+   
+    setUp(
+      natsScn.inject(constantUsersPerSec(15) during (1 minute))
+    ).protocols(natsProtocol)
+  }
+}
+```
+
 ## Samples
 * The ['docker-nats-connector-spark'](https://github.com/Logimethods/docker-nats-connector-spark) Docker Based Project that makes use of Gatling, Spark & NATS.
 
