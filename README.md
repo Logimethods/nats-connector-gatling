@@ -117,9 +117,6 @@ class ValueProvider {
 ```
 ## Usage in Scala, from Gatling to NATS STREAMING
 ```scala
-...
-package com.logimethods.nats.demo
-
 import scala.concurrent.duration._
 import java.util.Properties
 import io.nats.client.Constants.PROP_URL
