@@ -158,6 +158,15 @@ class NatsStreamingInjection extends Simulation {
 * Is based on [Gatling version 2.2.2](http://gatling.io/docs/2.2.2/).
 * Requires JDK8
 
+### Version 0.3.0-SNAPSHOT
+* Introduces the NatsMessage Trait:
+```
+trait NatsMessage {
+  def getSubject(): String
+  def getPayload(): Array[Byte]
+}
+```
+
 ## License
 
 (The MIT License)
