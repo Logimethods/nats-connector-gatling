@@ -50,7 +50,7 @@ object NatsStreamingProtocol {
   }
 }
 
-/** A Gatling Protocol to inject messages into NATS.
+/** A Gatling Protocol to inject messages into NATS Streaming.
  *  
  * @see [[https://www.trivento.io/write-custom-protocol-for-gatling/ Write a Custom Protocol for Gatling]] 
  * @see [[https://github.com/nats-io/jnats/blob/jnats-0.4.1/src/main/java/io/nats/client/ConnectionFactory.java ConnectionFactory.java]]
@@ -68,11 +68,6 @@ case class NatsStreamingProtocol(natsUrl:String, clusterID: String, subject: Str
     val connection: Connection = connectionFactory.createConnection()
     
     logger.info(s"Connection to the '${clusterID}' NATS Streaming Server located at '${natsUrl}' with '$clientID' ClientID and '$subject' Subject")
-  
-/*  override def warmUp(): Unit = {
-    val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
-    connection = connectionFactory.createConnection()
-  }*/
 }
 
 case class NatsStreamingComponents(natsProtocol: NatsStreamingProtocol) extends ProtocolComponents {
@@ -92,7 +87,11 @@ object NatsStreamingCall {
 class NatsStreamingCall(messageProvider: Object, protocol: NatsStreamingProtocol, val next: Action, statsEngine: StatsEngine) extends ActionActor {
 
   override def execute(session: Session): Unit = {
-    protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+    import com.logimethods.connector.gatling.to_nats.NatsMessage
+    messageProvider match {
+      case m: NatsMessage => protocol.connection.publish(protocol.subject + m.getSubject(), m.getPayload())
+      case other => protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+    }
     
     next ! session
   }

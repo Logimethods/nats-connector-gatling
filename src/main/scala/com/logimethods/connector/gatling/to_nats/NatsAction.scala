@@ -66,11 +66,6 @@ case class NatsProtocol(properties: Properties, subject: String) extends Protoco
     val connection = connectionFactory.createConnection()
    
     logger.info(s"Connection to the NATS Server defined by '${properties}' with '$subject' Subject")
-  
-/*  override def warmUp(): Unit = {
-    val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
-    connection = connectionFactory.createConnection()
-  }*/
 }
 
 case class NatsComponents(natsProtocol: NatsProtocol) extends ProtocolComponents {
@@ -88,9 +83,12 @@ object NatsCall {
 }
 
 class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: Action, statsEngine: StatsEngine) extends ActionActor {
-
   override def execute(session: Session): Unit = {
-    protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+    import com.logimethods.connector.gatling.to_nats.NatsMessage
+    messageProvider match {
+      case m: NatsMessage => protocol.connection.publish(protocol.subject + m.getSubject(), m.getPayload())
+      case other => protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+    }
     
     next ! session
   }
@@ -134,10 +132,4 @@ case class NatsBuilder(messageProvider: Object) extends ActionBuilder {
     val natsComponents = components(protocolComponentsRegistry)
     NatsCall(messageProvider, natsComponents.natsProtocol, ctx.system, statsEngine, next)
   }
-  
-/*  override def build(next: ActorRef, protocols: Protocols): ActorRef = {
-    actor(actorName("NatsConnector")) {
-      new NatsCall(messageProvider, natsProtocol(protocols), next)
-    }
-  }*/
 }
