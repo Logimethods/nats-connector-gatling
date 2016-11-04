@@ -61,7 +61,8 @@ object NatsProtocol {
  * @param properties defining the parameters of NATS server to connect to. This connection is provided by a `new ConnectionFactory(properties)`
  * @param subject the subject on which the messages will be pushed to NATS
  */
-case class NatsProtocol(properties: Properties, subject: String) extends Protocol with StrictLogging {
+case class NatsProtocol(properties: Properties, subject: String, serializer: Object => Array[Byte] = (_.toString().getBytes()) ) 
+                extends Protocol with StrictLogging {
     val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
     val connection = connectionFactory.createConnection()
    
@@ -87,7 +88,7 @@ class NatsCall(messageProvider: Object, protocol: NatsProtocol, val next: Action
     import com.logimethods.connector.gatling.to_nats.NatsMessage
     messageProvider match {
       case m: NatsMessage => protocol.connection.publish(protocol.subject + m.getSubject(), m.getPayload())
-      case other => protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+      case other => protocol.connection.publish(protocol.subject, protocol.serializer(messageProvider))
     }
     
     next ! session

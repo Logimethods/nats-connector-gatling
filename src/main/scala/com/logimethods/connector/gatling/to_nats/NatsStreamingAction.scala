@@ -60,7 +60,8 @@ object NatsStreamingProtocol {
  * @param properties defining the parameters of NATS server to connect to. This connection is provided by a `new ConnectionFactory(properties)`
  * @param subject the subject on which the messages will be pushed to NATS
  */
-case class NatsStreamingProtocol(natsUrl:String, clusterID: String, subject: String) extends Protocol with StrictLogging {
+case class NatsStreamingProtocol(natsUrl:String, clusterID: String, subject: String, serializer: Object => Array[Byte] = (_.toString().getBytes()) )
+                extends Protocol with StrictLogging {
     val CLIENT_ID_ROOT = "NSP_"
     val clientID = CLIENT_ID_ROOT + System.identityHashCode(this) + Thread.currentThread().getId() + java.lang.System.currentTimeMillis()
     val connectionFactory: ConnectionFactory = new ConnectionFactory(clusterID, clientID)
@@ -90,7 +91,7 @@ class NatsStreamingCall(messageProvider: Object, protocol: NatsStreamingProtocol
     import com.logimethods.connector.gatling.to_nats.NatsMessage
     messageProvider match {
       case m: NatsMessage => protocol.connection.publish(protocol.subject + m.getSubject(), m.getPayload())
-      case other => protocol.connection.publish(protocol.subject, messageProvider.toString().getBytes())
+      case other => protocol.connection.publish(protocol.subject, protocol.serializer(messageProvider))
     }
     
     next ! session
