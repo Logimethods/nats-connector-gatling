@@ -10,6 +10,22 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 
 ## Summary
 
+## Release Notes
+
+### Version 0.3.0
+* Introduces the NatsMessage Trait:
+```
+trait NatsMessage {
+  def getSubject(): String
+  def getPayload(): Array[Byte]
+}
+```
+### Version 0.2.0
+* Is based on [Gatling version 2.2.2](http://gatling.io/docs/2.2.2/).
+* Requires JDK8
+
+### Version 0.1.0
+* Is based on [Gatling version 2.1.7](http://gatling.io/docs/2.1.7/).
 
 ## Installation
 
@@ -17,13 +33,10 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 
 #### Releases
 
-The two first versions (0.1.0 & 0.2.0) of the NATS Gatling connector have been released.
-It hovewer probably still needs some more testing to be fully validated.
-
-If you are embedding the NATS Gatling connector, add the following dependency to your project's Scala `build.sbt` file.
+To embed the NATS Gatling connector, add the following dependency to your project's Scala `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.2.0"
+libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.3.0"
 ```
 If you don't already have your build configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository.
 
@@ -37,7 +50,7 @@ Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) 
 If you are embedding the NATS Gatling connector, add the following dependency to your project's `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "0.3.0-SNAPSHOT"
+libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "0.4.0-SNAPSHOT"
 ```
 If you don't already have your build configured for using Maven snapshots, you'll also need to add the following repository.
 
@@ -147,25 +160,9 @@ class NatsStreamingInjection extends Simulation {
 }
 ```
 
-## Samples
+## Code Samples
 * The ['docker-nats-connector-spark'](https://github.com/Logimethods/docker-nats-connector-spark) Docker Based Project that makes use of Gatling, Spark & NATS.
-
-## Release Notes
-### Version 0.1.0
-* Is based on [Gatling version 2.1.7](http://gatling.io/docs/2.1.7/).
-
-### Version 0.2.0
-* Is based on [Gatling version 2.2.2](http://gatling.io/docs/2.2.2/).
-* Requires JDK8
-
-### Version 0.3.0-SNAPSHOT
-* Introduces the NatsMessage Trait:
-```
-trait NatsMessage {
-  def getSubject(): String
-  def getPayload(): Array[Byte]
-}
-```
+* The ['smart-meter'](https://github.com/Logimethods/smart-meter) Docker *Swarm* Based Project that makes use of Gatling, Cassandra, Golang, Spark & NATS.
 
 ## License
 
