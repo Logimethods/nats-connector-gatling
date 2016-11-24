@@ -128,6 +128,7 @@ class ValueProvider {
   }
 }
 ```
+
 ## Usage in Scala, from Gatling to NATS STREAMING
 ```scala
 import scala.concurrent.duration._
@@ -158,6 +159,35 @@ class NatsStreamingInjection extends Simulation {
     ).protocols(natsProtocol)
   }
 }
+```
+
+## Complex NATS Messages
+
+If you need to send NATS messages where the *payload is different than String*, or need to have *non constant subjects*, you have to provide `NatsMessage` Objects to the `NatsBuilder`.
+
+```scala
+import com.logimethods.connector.gatling.to_nats.NatsMessage
+
+class MyMessage extends NatsMessage {
+
+  def getSubject(): String = {
+    return "MySubject"
+  }
+  
+  def getPayload(): Array[Byte] = {
+    val value: Float = ...
+	var date:LocalDateTime = LocalDateTime.now()
+    // https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html
+    val buffer = ByteBuffer.allocate(8+4);
+    buffer.putLong(date.atOffset(ZoneOffset.MIN).toEpochSecond())
+    buffer.putFloat(value)
+    return buffer.array()    
+  }
+}
+```
+
+```scala
+val natsScn = scenario("NATS call").exec(NatsBuilder(new MyMessage()))
 ```
 
 ## Code Samples
