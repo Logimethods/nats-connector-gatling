@@ -11,10 +11,8 @@ package com.logimethods.connector.gatling.to_nats
 
 import akka.actor.{ ActorSystem, Props }
 import io.gatling.commons.stats.{ KO, OK }
-import io.gatling.commons.util.TimeHelper
 import io.gatling.core.CoreComponents
 import io.gatling.commons.stats.{ KO, OK }
-import io.gatling.commons.util.TimeHelper
 import io.gatling.core.CoreComponents
 import io.gatling.core.action.builder.ActionBuilder
 import io.gatling.core.action.{ Action, ActionActor, ExitableActorDelegatingAction }
