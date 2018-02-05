@@ -38,11 +38,11 @@ object NatsStreamingProtocol {
     type Protocol = NatsStreamingProtocol
     type Components = NatsStreamingComponents
 
-    def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsStreamingProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
+    override def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsStreamingProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
 
-    def defaultValue(configuration: GatlingConfiguration): NatsStreamingProtocol = throw new IllegalStateException("Can't provide a default value for NatsStreamingProtocol")
+    override def defaultProtocolValue(configuration: GatlingConfiguration): NatsStreamingProtocol = throw new IllegalStateException("Can't provide a default value for NatsStreamingProtocol")
 
-    def newComponents(system: ActorSystem, coreComponents: CoreComponents): NatsStreamingProtocol ⇒ NatsStreamingComponents = {
+    override def newComponents(system: ActorSystem, coreComponents: CoreComponents): NatsStreamingProtocol ⇒ NatsStreamingComponents = {
       natsProtocol ⇒ NatsStreamingComponents(natsProtocol)
     }
   }

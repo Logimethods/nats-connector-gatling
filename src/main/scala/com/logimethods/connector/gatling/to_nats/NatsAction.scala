@@ -34,16 +34,17 @@ import io.nats.client.Message;
 import com.typesafe.scalalogging.StrictLogging
 
 object NatsProtocol {
+  // @See http://leaks.wanari.com/2017/02/10/write-custom-protocol-gatling/
   val NatsProtocolKey = new ProtocolKey {
 
     type Protocol = NatsProtocol
     type Components = NatsComponents
 
-    def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
+    override def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
 
-    def defaultValue(configuration: GatlingConfiguration): NatsProtocol = throw new IllegalStateException("Can't provide a default value for NatsProtocol")
+    override def defaultProtocolValue(configuration: GatlingConfiguration): NatsProtocol = throw new IllegalStateException("Can't provide a default value for NatsProtocol")
 
-    def newComponents(system: ActorSystem, coreComponents: CoreComponents): NatsProtocol ⇒ NatsComponents = {
+    override def newComponents(system: ActorSystem, coreComponents: CoreComponents): NatsProtocol ⇒ NatsComponents = {
       natsProtocol ⇒ NatsComponents(natsProtocol)
     }
   }
