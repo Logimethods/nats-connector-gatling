@@ -12,6 +12,7 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 
 ## Release Notes
 ### Version 0.4.0-SNAPSHOT
+* Based on java-nats-streaming version 0.5.0
 
 ### Version 0.3.0
 * Introduces the NatsMessage Trait:
