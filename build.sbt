@@ -12,8 +12,8 @@ scalaVersion := "2.11.7"
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 resolvers += "Sonatype OSS Release" at "https://oss.sonatype.org/content/groups/public/"
 
-libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.2" % "provided"
-libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "2.2.2" % "test"
+libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.5" % "provided"
+libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "2.2.5" % "test"
 libraryDependencies += "io.nats" 			  % "java-nats-streaming"	    % "0.5.0"
 
 // enablePlugins(GatlingPlugin)
