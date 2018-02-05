@@ -29,8 +29,8 @@ import io.gatling.jms.action.JmsReqReply._
 import scala.concurrent.{ Future, Promise }
 
 import java.util.Properties;
-import io.nats.stan.Connection;
-import io.nats.stan.ConnectionFactory;
+import io.nats.streaming.StreamingConnectionFactory;
+import io.nats.streaming.StreamingConnection;
 
 import com.typesafe.scalalogging.StrictLogging
 
@@ -64,9 +64,9 @@ case class NatsStreamingProtocol(natsUrl:String, clusterID: String, subject: Str
                 extends Protocol with StrictLogging {
     val CLIENT_ID_ROOT = "NSP_"
     val clientID = CLIENT_ID_ROOT + System.identityHashCode(this) + Thread.currentThread().getId() + java.lang.System.currentTimeMillis()
-    val connectionFactory: ConnectionFactory = new ConnectionFactory(clusterID, clientID)
+    val connectionFactory: StreamingConnectionFactory = new StreamingConnectionFactory(clusterID, clientID)
     connectionFactory.setNatsUrl(natsUrl)
-    val connection: Connection = connectionFactory.createConnection()
+    val connection: StreamingConnection = connectionFactory.createConnection()
     
     logger.info(s"Connection to the '${clusterID}' NATS Streaming Server located at '${natsUrl}' with '$clientID' ClientID and '$subject' Subject")
 }
