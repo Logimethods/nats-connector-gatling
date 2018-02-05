@@ -11,7 +11,7 @@ The NATS Gatling library provides a [Gatling](http://gatling.io/) (an open-sourc
 ## Summary
 
 ## Release Notes
-### Version 0.4.0-SNAPSHOT
+### Version 0.4.0
 * Based on java-nats-streaming version 0.5.0
 * Based on Gatling 2.2.5
 
