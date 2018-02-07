@@ -39,7 +39,7 @@ trait NatsMessage {
 To embed the NATS Gatling connector, add the following dependency to your project's Scala `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.3.0"
+libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.4.0"
 ```
 If you don't already have your build configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository.
 
