@@ -28,7 +28,8 @@ import scala.concurrent.{ Future, Promise }
 
 import java.util.Properties;
 import io.nats.client.Connection;
-import io.nats.client.ConnectionFactory;
+import io.nats.client.Nats;
+import io.nats.client.Options
 import io.nats.client.Message;
 
 import com.typesafe.scalalogging.StrictLogging
@@ -62,8 +63,7 @@ object NatsProtocol {
  */
 case class NatsProtocol(properties: Properties, subject: String, serializer: Object => Array[Byte] = (_.toString().getBytes()) ) 
                 extends Protocol with StrictLogging {
-    val connectionFactory: ConnectionFactory = new ConnectionFactory(properties);
-    val connection = connectionFactory.createConnection()
+    val connection = Nats.connect(new Options.Builder(properties).build())
    
     logger.info(s"Connection to the NATS Server defined by '${properties}' with '$subject' Subject")
 }
