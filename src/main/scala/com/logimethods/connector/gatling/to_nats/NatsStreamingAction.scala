@@ -22,7 +22,9 @@ import io.gatling.core.session.Session
 import io.gatling.core.stats.StatsEngine
 import io.gatling.core.stats.message.ResponseTimings
 import io.gatling.core.structure.ScenarioContext
-import io.gatling.jms.action.JmsReqReply._
+import io.gatling.commons.util.Clock
+import io.gatling.core.util.NameGen
+//import io.gatling.jms.action.JmsReqReply._
 
 import scala.concurrent.{ Future, Promise }
 
@@ -33,16 +35,16 @@ import io.nats.streaming.StreamingConnection;
 import com.typesafe.scalalogging.StrictLogging
 
 object NatsStreamingProtocol {
-  val NatsStreamingProtocolKey = new ProtocolKey {
+  val NatsStreamingProtocolKey = new ProtocolKey[NatsStreamingProtocol, NatsStreamingComponents] {
 
-    type Protocol = NatsStreamingProtocol
-    type Components = NatsStreamingComponents
+///-    type Protocol = NatsStreamingProtocol
+///-    type Components = NatsStreamingComponents
 
-    override def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsStreamingProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
+    def protocolClass: Class[io.gatling.core.protocol.Protocol] = classOf[NatsStreamingProtocol].asInstanceOf[Class[io.gatling.core.protocol.Protocol]]
 
-    override def defaultProtocolValue(configuration: GatlingConfiguration): NatsStreamingProtocol = throw new IllegalStateException("Can't provide a default value for NatsStreamingProtocol")
+    def defaultProtocolValue(configuration: GatlingConfiguration): NatsStreamingProtocol = throw new IllegalStateException("Can't provide a default value for NatsStreamingProtocol")
 
-    override def newComponents(system: ActorSystem, coreComponents: CoreComponents): NatsStreamingProtocol ⇒ NatsStreamingComponents = {
+    def newComponents(coreComponents: CoreComponents): NatsStreamingProtocol ⇒ NatsStreamingComponents = {
       natsProtocol ⇒ NatsStreamingComponents(natsProtocol)
     }
   }
@@ -71,14 +73,14 @@ case class NatsStreamingProtocol(natsUrl:String, clusterID: String, subject: Str
 
 case class NatsStreamingComponents(natsProtocol: NatsStreamingProtocol) extends ProtocolComponents {
 
-  def onStart: Option[Session ⇒ Session] = None
-  def onExit: Option[Session ⇒ Unit] = None
+  override def onStart: Session => Session = ProtocolComponents.NoopOnStart
+  override def onExit: Session => Unit = ProtocolComponents.NoopOnExit
 }
 
-object NatsStreamingCall {
-  def apply(messageProvider: Object, protocol: NatsStreamingProtocol, system: ActorSystem, statsEngine: StatsEngine, next: Action) = {
+object NatsStreamingCall extends NameGen {
+  def apply(messageProvider: Object, protocol: NatsStreamingProtocol, system: ActorSystem, statsEngine: StatsEngine, clock: Clock, next: Action) = {
     val actor = system.actorOf(Props(new NatsStreamingCall(messageProvider, protocol, next, statsEngine)))
-    new ExitableActorDelegatingAction(genName("natsCall"), statsEngine, next, actor)
+    new ExitableActorDelegatingAction(genName("natsCall"), statsEngine, clock, next, actor)
   }
 
 }
@@ -130,8 +132,10 @@ case class NatsStreamingBuilder(messageProvider: Object) extends ActionBuilder {
   override def build(ctx: ScenarioContext, next: Action): Action = {
     import ctx._
     val statsEngine = coreComponents.statsEngine
+    val system = ctx.coreComponents.actorSystem
+    val clock = ctx.coreComponents.clock
 
     val natsComponents = components(protocolComponentsRegistry)
-    NatsStreamingCall(messageProvider, natsComponents.natsProtocol, ctx.system, statsEngine, next)
+    NatsStreamingCall(messageProvider, natsComponents.natsProtocol, system, statsEngine, clock, next)
   }
 }
