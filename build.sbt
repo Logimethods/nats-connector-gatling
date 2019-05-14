@@ -5,7 +5,7 @@ organization := "com.logimethods"
 // Your profile name of the sonatype account. The default is the same with the organization value
 //// sonatypeProfileName := "laurent.magnin"
 
-version := "1.0.0-SNAPSHOT"
+version := "1.0.0"
 
 scalaVersion := "2.12.8"
 
