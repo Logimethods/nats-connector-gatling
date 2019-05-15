@@ -44,7 +44,7 @@ trait NatsMessage {
 To embed the NATS Gatling connector, add the following dependency to your project's Scala `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "0.4.0"
+libraryDependencies += "com.logimethods" % "nats-connector-gatling_2.11" % "1.0.0"
 ```
 If you don't already have your build configured for using Maven releases from Sonatype / Nexus, you'll also need to add the following repository.
 
@@ -58,7 +58,7 @@ Snapshots are regularly uploaded to the Sonatype OSSRH (OSS Repository Hosting) 
 If you are embedding the NATS Gatling connector, add the following dependency to your project's `build.sbt` file.
 
 ```scala
-libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "0.4.0-SNAPSHOT"
+libraryDependencies += "com.logimethods" %% "nats-connector-gatling_2.11" % "1.0.0-SNAPSHOT"
 ```
 If you don't already have your build configured for using Maven snapshots, you'll also need to add the following repository.
 
