@@ -5,16 +5,16 @@ organization := "com.logimethods"
 // Your profile name of the sonatype account. The default is the same with the organization value
 //// sonatypeProfileName := "laurent.magnin"
 
-version := "0.4.0"
+version := "1.0.0"
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.12.8"
 
 resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 resolvers += "Sonatype OSS Release" at "https://oss.sonatype.org/content/groups/public/"
 
-libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.5" % "provided"
-libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "2.2.5" % "test"
-libraryDependencies += "io.nats" 			  % "java-nats-streaming"	    % "0.5.0"
+libraryDependencies += "io.gatling.highcharts" % "gatling-charts-highcharts" % "3.0.3" % "provided"
+libraryDependencies += "io.gatling"            % "gatling-test-framework"    % "3.0.3" % "test"
+libraryDependencies += "io.nats"               % "java-nats-streaming"       % "2.1.2"
 
 // enablePlugins(GatlingPlugin)
 
